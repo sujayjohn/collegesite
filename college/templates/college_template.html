@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+{%load staticfiles%}
+<link async='' rel="shortcut icon" href='{% static "college/images/favicon.ico"%}'> 
+<link rel="stylesheet" type="text/css" href="{% static "college/css/college_template.css"%}">
+{%block header%}
+
+{%endblock%}
+</head>
+<body>
+	
+	<div id='site_header_wrapper'>	
+		<div id='head1'>
+			<div class='header_text'>
+			<a href='{%url 'college_home'%}'>
+			<div>
+			<img async='' id='header_logo' src='{% static "college/images/site_header.png"%}' height=58px width=53px alt=' '></img>
+			</div>
+			<div id='arjoonn'>ST. STEPHEN'S COLLEGE<hr></hr><div class='subtext'>University Enclave,Delhi-110007</div></div>			
+			</a>	
+			</div>
+			<div id='icons'>
+				<a href='{%url 'news_rss'%}'>
+				<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
+				</a>
+				
+			</div>
+			
+		</div>
+	</div>
+	<hr>
+	<br>
+	
+		<div id='navigation'>
+				<ul>
+					<a href='{%url 'college_home'%}'><li>Home</li></a>
+
+					<a href='{%url "academics_home"%}'><li>Academics</li></a>
+					<a href='{%url "admissions_home"%}'><li>Admissions</li></a>					
+					<a href='{%url "events_home"%}'><li>Events</li></a>
+					<a href='{%url 'society_home'%}'><li>Societies</li></a>
+					<a href='{%url 'department_home'%}'><li>Departments</li></a>
+					<a href='{%url 'archive_home'%}'><li>Archives</li></a>
+					<a href='{%url 'alumni_home'%}'><li>Alumni</li></a>
+					<a href='{%url 'contact_us'%}'><li>Contact Us</li></a>
+				</ul>
+			<div id='status_bar'>
+				{%if user.is_authenticated%}
+					{{user.username}}
+						<a href=' {% url 'django.contrib.auth.views.logout'%}'>Logout</a>
+				{%else%}
+					<a href=' {% url 'django.contrib.auth.views.login'%}'>Login</a>
+				{%endif%}
+				</div>
+			
+		</div>
+				
+<hr>
+	<div id='body_content'>
+		{%block body%}
+		{%endblock%}
+	</div>
+
+
+	<div id='footer' class='subtext'>
+		<hr>
+			
+			<br>
+			Copyright © 2014 St. Stephen's College. All rights reserved.  <a href="legal/terms.html">Terms of Service</a>.
+			<a href="legal/privacy.html">Privacy Policy.</a>
+			<a href="legal/rti.html">
+			  Right To Information Act</a>
+			Send technical enquires and report errors or broken links to
+			<a href="mailto:stephens.webteam@gmail.com?subject=Enquiry - St. Stephen's College Website">stephens.webteam@gmail.com</a> 
+
+			<a href="teams/foundingteam.html">Founding Team</a>		<a href="teams/renovteam.html"> Renovation Team</a>
+			<a href="teams/webteam.html">Present WebTeam</a>
+	
+	
+	</div>
+</body>
+</html>

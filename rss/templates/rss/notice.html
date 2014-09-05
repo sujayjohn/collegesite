@@ -1,0 +1,8 @@
+{% extends 'college_template.html'%}
+{%block body%}
+	<table style='text-align:left;color:white;border:1px solid white;border-radius:5px;'>
+		{%for k,v in notice.iteritems%}
+			<tr><td style='border-right:1px solid white;'>{{k}}</td><td>{{v}}</td></tr>	
+		{%endfor%}
+	</table>
+{%endblock%}

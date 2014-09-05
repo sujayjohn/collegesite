@@ -1,0 +1,53 @@
+{% extends 'college_template.html'%}
+{%block body%}
+{%if not_cleared%}
+<div id='clear_selected'>
+	<form id='notics_approval_form' action='{%url "notices_approve"%}' method='post'>
+	{%csrf_token%}
+	{%for i in not_cleared%}
+	<input type='checkbox' name={{i.id}} id={{i.id}}>
+	<p>
+	{{i.heading}}<br>{{i.pub_date}}<br>{{i.description}}<br>{{i.author.user.username}}
+	</p>
+	</input><br>
+	{%endfor%}
+	<input type='submit' value='Approve Selected'></input>
+	</form>
+</div>
+<hr>
+{%endif%}
+
+	{%if teb_form%}
+	<div id='create_notice'>
+		<form action='{%url "notice_add_new"%}' method='post'>
+		{%csrf_token%}
+		{{teb_form}}
+		<input type='submit' value='submit notice'></input>
+		</form>
+	</div>
+	{%endif%}
+	<div style='overflow:auto;'>
+		<style>
+		table
+		{
+		text-align:left;color:white;border:1px solid white;border-radius:5px;
+		}
+		td
+		{
+		border-right:1px solid white;
+		}
+		
+		</style>
+		{%for val in noticeboard%}
+		<table>
+			<tr>
+				<td>Subject</td><td>{{val.heading}}</td>
+				<td>Description</td><td>{{val.description}}</td>
+				<td>Published on</td><td>{{val.pub_date}}</td>
+				<td>Signed</td><td>{{val.author}}</td>
+			</tr>
+		</table>
+		<hr>
+		{%endfor%}
+	</div>
+{%endblock%}

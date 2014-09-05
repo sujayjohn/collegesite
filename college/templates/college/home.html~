@@ -1,0 +1,86 @@
+{%extends 'college_template.html'%}
+
+{%block header%}
+{% load staticfiles%}
+<link rel="stylesheet" type="text/css" href='{% static "/static/college/css/home.css"%}'>
+<script type="text/javascript" src="{% static "college/home.js" %}" ></script>
+
+<script>
+var image_src_list=[]
+	{% for name in picture_gallery%}
+image_src_list.push('{% static "college/images/homepage/"|add:name %}' );
+	{%endfor%}
+</script>
+{%endblock%}
+
+{%block body%}
+
+	{%if quote_of_the_day%}
+	<div id='quote' class='homedock'>
+		{{quote_of_the_day.value}}
+	</div>
+	{%endif%}
+<div id='images_dock'>
+	<img id='top_pic' src='{% static "college/images/homepage/Elisha Bhattarai.jpg" %}' alt='' width=100% height=500px></img>
+	<img id='bottom_pic' src='{% static "college/images/homepage/Satender Singh (2).jpg" %}' alt='' width=100% height=500px></img>
+</div>
+<hr>
+	<div id='applications' class='homedock'>
+	APPLICATIONS<hr>
+		<ul>
+			<a href='{%url 'docs_home'%}' ><li>Document Tracking</li></a>
+			<a href='http://sscattendance.formistry.com/report/'><li>Attendence</li></a>
+			<a href='{%url 'roombook_home'%}'><li>Room Booking</li></a>
+			<a href='{%url 'news_home'%}'><li>Notice Board</li></a>
+			<a href='http://library.ststephens.edu/'><li>e-Library</li></a>
+		</ul>
+	</div>
+	<div id='news' class='homedock'>
+	<a href='{%url 'news_home'%}'>NEWS</a><hr>
+		<ul>
+			{%for n in news%}
+			<a href='{%url "notice" n.id%}'><li>{{n.heading}}</li></a>
+			{%endfor%}
+		</ul>
+	</div>
+	
+	<div id='permanent_links' class='homedock'>
+	NOTIFICATIONS<hr>
+		<ul>
+			<li>Admissions 2014 <image width=25 src='{%static "college/images/new-animated.gif"%}'></img></li>
+			<li>Rudra dinner</li>
+			{%if admission_list%}
+				{%for i in admission_list%}
+					<a target='_blank' href='{{i.list_doc.url}}'>{{i.name}}</a>
+				{%endfor%}
+			{%endif%}
+		</ul>
+	</div>
+	<div id='events' class='homedock'>
+	EVENTS<hr>
+		<iframe width=100% height=100% src="//www.youtube.com/embed/fB4mKTNgp00" frameborder="0" allowfullscreen></iframe>
+	</div>
+	
+	
+<script>
+var top_pic=document.getElementById('top_pic');
+var bottom_pic=document.getElementById('bottom_pic');
+var dock=document.getElementById(DOCK_ID);
+
+top_pic.width=dock.clientWidth;
+top_pic.height=dock.clientHeight;
+top_pic.clientLeft=dock.clientLeft;
+top_pic.clientTop=dock.clientTop;
+
+
+bottom_pic.width=dock.clientWidth;
+bottom_pic.height=dock.clientHeight;
+bottom_pic.clientLeft=dock.clientLeft;
+bottom_pic.clientTop=dock.clientTop;
+
+set_opacity(top_pic,1);
+set_opacity(bottom_pic,1);
+setTimeout('start_show()',DISPLAY_TIME);</script>
+
+
+{%endblock%}

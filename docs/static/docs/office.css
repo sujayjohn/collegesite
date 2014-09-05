@@ -1,0 +1,48 @@
+.files {
+  display: block;
+  width: 115px;
+  height: 25px;
+  background: #4E9CAF;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size:large;
+  float:left;
+  margin:5px;
+}
+#table_search_box
+{
+float:left;
+}
+#inbox
+{
+height:200px;
+width:500px;
+border:solid 1px;
+float:left;
+margin:5px;
+overflow:auto;
+}
+#outbox
+{
+height:200px;
+width:500px;
+border:solid 1px;
+float:left;
+margin:5px;
+overflow:auto;
+}
+#controls
+{
+height:200px;
+float:left;
+width:200px;
+overflow:auto;
+}
+.control_items
+{
+float:left;
+width:180px;
+margin:3px;
+}

@@ -1,0 +1,4 @@
+{%extends 'college/society_home.html'%}
+{%block society_page%}
+{%endblock%}
+

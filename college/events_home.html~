@@ -1,0 +1,3 @@
+{%extends 'college_template.html'%}
+{%block body%}
+{%endblock%}

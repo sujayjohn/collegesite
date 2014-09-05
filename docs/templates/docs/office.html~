@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+
+{%block external_files%}
+{%load staticfiles%}
+<script type="text/javascript" src="{% static "docs/office.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static "docs/office.css"%}">
+{%endblock%}
+
+{%block content%}
+<input id='docs' type='hidden' value='{{docs_on_table}}'></input>
+<div id='table'>
+	<div id='inbox'>
+	</div>
+	<div id='controls'>
+	CONTROLS
+		<input class='control_items' type='text' id='table_search_box' onkeyup='table_search(event);'></input>
+		<button class='control_items' id='table_move_button' onclick='move();'>Move</button>
+		<button class='control_items' id='table_note_button' onclick='add_note();'>Make Note</button>	
+		<textarea class='control_items' id='note_text'  cols="20">Notes</textarea>
+		<button class='control_items' id='clear_outbox_button' onclick='clear_outbox();'>Clear Outbox</button>
+	</div>
+	<div id='outbox'>
+	</div>
+	
+	<hr>
+	{%if can_add_new_doc%}
+	<div id='new_document'>
+			<form method='post' action='{%url "docs_add"%}'>
+			
+			{%csrf_token%}
+			{{doc_form}}
+				<input type='submit' value='Add document'></input>
+			</form>
+	</div>
+	{%endif%}
+	
+	
+</div>
+
+<script type='text/javascript'>
+setup_table();
+
+</script>
+<form id='edit_form' method='post' action='/docs/edit'>
+			{%csrf_token%}
+			
+</form>
+{%endblock%}

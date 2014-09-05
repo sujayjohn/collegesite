@@ -1,0 +1,6 @@
+{%extends 'college/department_home.html'%}
+{%block dept_page%}
+{% load staticfiles%}
+<img src='{%static "college/images/sports/Captain & Secretaries.jpg"%}'></img>
+{%endblock%}
+

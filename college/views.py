@@ -1,0 +1,110 @@
+from django.shortcuts import render
+from django.utils import timezone
+import datetime
+import os
+import college.models as college_models
+from rss.models import *
+import random
+
+def home(request):
+	'''returns the home page'''
+	#record the client data
+	client_addr=request.META['REMOTE_ADDR']
+	client_browser=request.META['HTTP_USER_AGENT']
+	try:
+		ob=college_models.client_data.objects.get(addr=client_addr)
+	except:
+		ob=college_models.client_data()
+		ob.addr=client_addr
+		ob.agent=client_browser
+		ob.save()
+	else:
+		ob.visits+=1
+		if ob.agent!=client_browser:
+			ob.agent=client_browser
+		ob.save()
+	#now respond to request
+	data={}
+	here=os.getcwd()
+	
+	path=os.path.join(here,'college','static','college','images','homepage')
+	data['picture_gallery']=os.listdir(path)
+	data['quote_of_the_day']=random.choice(college_models.quote.objects.all())
+	
+	now=timezone.now()
+	one_month_back=datetime.datetime(now.date().year,now.date().month-1,now.date().day,now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
+	notices=teb_board.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).order_by('-pub_date')[:5]
+	data['news']=notices
+	
+	lists=college_models.admission_list.objects.all()
+	data['admission_list']=lists
+	return render(request,'college/home.html',data)
+
+def alumni(request):
+	data={}
+	return render(request,'college/alumni_home.html',data)
+
+def archive(request):
+	data={}
+	return render(request,'college/archive_home.html',data)
+def society(request,soc_name=None):
+	data={}
+	if soc_name==None:
+		soc_list=college_models.society.objects.all()
+		data['society_list']=[{'name':i.name,'urlname':i.name.replace(' ','').lower()} for i in soc_list]
+		return render(request,'college/society_home.html',data)
+	else:
+		try:
+			temp=college_models.society.objects.all()
+			temp2=[i.name for i in temp if i.name.replace(' ','').lower()==soc_name.strip().lower()]
+			temp2=temp2[0]
+			data['soc_page']=temp2
+			
+			
+			template_name='college/society/'+soc_name.replace(' ','').lower()+'.html'
+			return render(request,template_name,data)
+		except Exception as e:
+			print e
+			soc_list=college_models.society.objects.all()
+			data.pop('soc_page')
+			data['society_list']=[{'name':i.name,'urlname':i.name.replace(' ','').lower()} for i in soc_list]
+			return render(request,'college/society_home.html',data)
+def events(request):
+	data={}
+	return render(request,'college/events_home.html',data)		
+def department(request,dept_name=None):
+	data={}
+	dept_list=college_models.department.objects.all()
+	if dept_name==None:
+		data['department_list']=[{'name':i.name,'urlname':i.name.replace(' ','').lower()} for i in dept_list]
+		return render(request,'college/department_home.html',data)
+	else:
+		try:
+			temp=college_models.department.objects.all()
+			temp2=[i.name for i in temp if i.name.replace(' ','').lower()==dept_name.strip().lower()]
+			temp2=temp2[0]
+			data['dept_page']=temp2
+			
+			template_name='college/department/'+dept_name.replace(' ','').lower()+'.html'
+			return render(request,'college/department/'+dept_name+'.html',data)
+		except Exception as e:
+			print e
+			data.pop('dept_page')
+			data['department_list']=[{'name':i.name,'urlname':i.name.replace(' ','').lower()} for i in dept_list]
+			return render(request,'college/department_home.html',data)
+def principal(request):
+	data={}
+	return render(request,'college/principal_home.html',data)
+def contact_us(request):
+	data={}
+	data['contacts']=college_models.contact.objects.all()
+	return render(request,'college/contact_us.html',data)
+	
+def academics_home(request):
+	data={}
+	
+	return render(request,'college/academics_home.html',data)
+def admissions_home(request):
+	data={}
+	
+	return render(request,'college/admissions_home.html',data)

@@ -1,0 +1,59 @@
+{%extends 'college_template.html'%}
+
+{%block header%}
+	{%load staticfiles%}
+	<script type="text/javascript" src="{% static "college/json2.js" %}" ></script>	
+	<script type='text/javascript' src="{%static 'roombook/home.js'%}"></script>
+	<link rel="stylesheet" type="text/css" href='{%static 'roombook/home.css'%}'></link>
+	
+{%endblock%}
+
+{%block body%}
+{%if error%}
+{{error}}
+{%endif%}
+<input type='hidden' id='list_of_rooms' value='{{room_data}}'></input>
+
+
+
+{%if user.is_authenticated%}
+	<form action="{%url "room_booking"%}"method="post">{%csrf_token%}
+	{{reservation_form}}			
+	<input type='submit' value='Book Now'></input>
+	</form>
+{%else%}
+	<a href='{%url 'django.contrib.auth.views.login'%}'>
+	You need to login to book a room.
+	</a>
+{%endif%}
+
+{%if not_cleared%}
+<div id='clear_selected'>
+	<form id='reservation_approval_form' action='{%url "roombook_approve"%}' method='post'>
+	{%csrf_token%}
+	{%for i in not_cleared%}
+	<input type='checkbox' name={{i.id}} id={{i.id}}>
+	{{i}}==|=={{i.time_from}}==|=={{i.time_to}}==|=={{i.booked_by.staff_adv1}}
+	</input><br>
+	{%endfor%}
+	<input type='submit' value='Approve Selected'></input>
+	</form>
+</div>
+<hr>
+{%endif%}
+
+
+
+
+<div id='search_rooms'>	
+		<input type='checkbox' id='projector' name='projector' checked='true'>Projector</input><br>
+		<input type='checkbox' id='air_cond' name='air_cond' checked='true'>Air Conditioned</input><br>
+	<hr>	
+	<div id='rooms_display'>
+		
+	</div>
+	
+
+</div>
+<script>setup_rooms();</script>
+{%endblock%}

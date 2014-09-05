@@ -1,0 +1,26 @@
+#body_content
+{
+height:auto;
+text-align:left;
+}
+#admission_info p
+{
+background-color:#D1DBBD;
+}
+#admission_info li,.admission_info a
+{
+color:black;
+margin:0;
+list-style:inherit;
+}
+#admission_info li:hover
+{
+color:black;
+margin:0;
+list-style:inherit;
+}
+h4
+{
+color:#E36C0A;
+}
+

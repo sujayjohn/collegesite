@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+
+{%block content%}
+{%if new_id%}
+New document ID is {{new_id}}
+{%endif%}
+<hr>
+<a href='{%url "docs_office"%}'>Back to office</a>
+{%endblock%}
