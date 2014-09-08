@@ -37,6 +37,7 @@ def home(request):
 	data['news']=notices
 	
 	lists=college_models.admission_list.objects.all()
+	data['admission_list']=lists
 	return render(request,'college/home.html',data)
 
 def alumni(request):

@@ -8,7 +8,7 @@ for(var i=1;i>=0;i-=OPACITY_STEP)
 	opacity_steps.push(i);
 	}
 var opacity_step_count=0;
-var DOCK_ID='body_content';
+var DOCK_ID='images_dock';
 
 
 function set_opacity(passed_object,opacity)

@@ -35,9 +35,10 @@ def home(request):
 	one_month_back=datetime.datetime(now.date().year,now.date().month-1,now.date().day,now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
 	notices=teb_board.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).order_by('-pub_date')[:5]
 	data['news']=notices
-	
+	'''
 	lists=college_models.admission_list.objects.all()
 	data['admission_list']=lists
+	'''
 	return render(request,'college/home.html',data)
 
 def alumni(request):
