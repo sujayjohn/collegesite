@@ -3,7 +3,7 @@ from django.utils import timezone
 from college.models import *
 from django.forms import ModelForm
 
-class teb_board(models.Model):
+class notice(models.Model):
 	def __unicode__(self):
 		return str(self.heading)
 	
@@ -19,14 +19,14 @@ class teb_board(models.Model):
 		data={}
 		data['Title']=self.heading
 		data['Date']=str(self.pub_date.year)+'/'+str(self.pub_date.month)+'/'+str(self.pub_date.day)
-		data['From']=self.soc.name
+		data['From']=self.soc.name if self.soc!=None else ''
 		data['Signed']=self.author.user.username
 		data['Description']=self.description[:100]
 		return data
 	class Meta:
 		permissions=(('can_approve_teb_board',"Can approve a Today's Engagement Board notice"),)
 		
-class teb_board_form(ModelForm):
+class notice_form(ModelForm):
 	class Meta:
-		model=teb_board
+		model=notice
 		fields=['heading','soc','description','pub_date']

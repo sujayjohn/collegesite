@@ -2,7 +2,7 @@ from django.contrib import admin
 from college.models import *
 
 
-
+admin.site.register(custom_notice)
 admin.site.register(client_data)
 admin.site.register(paper)
 admin.site.register(course)

@@ -1,17 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+import datetime
 
-
-class document_link(models.Model):
-	def __unicode__(self):
-		return self.name
-	name=models.CharField(max_length=100)
-	list_doc=models.FileField(upload_to='files')
 
 '''
 <iframe src="http://docs.google.com/gview?url=http://path.com/to/your/pdf.pdf&embedded=true"style="width:600px; height:500px;" frameborder="0"></iframe>
 '''
+class custom_notice(models.Model):
+	def __unicode__(self):
+		return self.title
+	title=models.CharField(max_length=100)
+	associated_file=models.FileField(upload_to='files',null=True,blank=True)
+	alive=models.BooleanField(default=True)
+	pub_date=models.DateTimeField(default=timezone.now())
+	def recent(self):
+		now=timezone.now()
+		one_month_back=datetime.datetime(now.date().year,now.date().month-1,now.date().day,now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
+		if now>one_month_back:
+			return True
+		return False
+		
 class client_data(models.Model):
 	def __unicode__(self):
 		return self.addr

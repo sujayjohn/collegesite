@@ -30,12 +30,11 @@
 		</div>
 	</div>
 	<hr>
-	<br>
+
 	
 		<div id='navigation'>
 				<ul>
 					<a href='{%url 'college_home'%}'><li>Home</li></a>
-
 					<a href='{%url "academics_home"%}'><li>Academics</li></a>
 					<a href='{%url "admissions_home"%}'><li>Admissions</li></a>					
 					<a href='{%url "events_home"%}'><li>Events</li></a>

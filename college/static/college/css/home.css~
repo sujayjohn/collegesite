@@ -1,10 +1,10 @@
 #images_dock 
 {
-height:450px;
+height:500px;
 }
 #body_content div
 {
-
+background:black;
 border-radius:3%;
 margin-left:0.1%;
 }

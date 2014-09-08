@@ -5,7 +5,7 @@
 {%if contacts%}
 <table>
 <thead style='background-color:lightblue'>
-<td>Purpose</td><td>Facilitator</td><td>Value</td>
+<td>Purpose</td><td>Facilitator</td><td>Detail</td>
 </thead>
 <tbody>
 {%for i in contacts%}
@@ -20,6 +20,8 @@
 {%endif%}
 
 <div id='google_map_frame'>
+Location on Map
+<br>
 	<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3500.1052177754555!2d77.212977!3d28.686498999999994!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd93efe5376b%3A0x87e7248a72724203!2sSt+Stephens+College!5e0!3m2!1sen!2sin!4v1409207082362" width="600" height="450" frameborder="0" style="border:0"></iframe>
 </div>
 {%endblock%}

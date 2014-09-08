@@ -3,13 +3,13 @@ from django.utils import timezone
 from college.models import *
 from django.forms import ModelForm
 
-class teb_board(models.Model):
+class notice(models.Model):
 	def __unicode__(self):
 		return str(self.heading)
 	
 	heading=models.CharField(max_length=50)
 	pub_date=models.DateField('Publication Date',default=timezone.now())
-	soc=models.ForeignKey(societies,null=True,blank=True)
+	soc=models.ForeignKey(society,null=True,blank=True)
 	description=models.CharField(max_length=800)
 	author=models.ForeignKey(userprofile,related_name='author')
 	approved=models.BooleanField(default=False)
@@ -26,7 +26,7 @@ class teb_board(models.Model):
 	class Meta:
 		permissions=(('can_approve_teb_board',"Can approve a Today's Engagement Board notice"),)
 		
-class teb_board_form(ModelForm):
+class notice_form(ModelForm):
 	class Meta:
-		model=teb_board
+		model=notice
 		fields=['heading','soc','description','pub_date']

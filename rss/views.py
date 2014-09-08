@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_safe,require_http_methods
-from rss.models import teb_board as teb
-from rss.models import teb_board_form
+from rss.models import notice as teb
+from rss.models import notice_form
 from django.utils import timezone
 import datetime
 
@@ -11,9 +11,9 @@ def home(request):
 	data={}
 	if request.user.is_authenticated():
 		if request.user.is_active:
-			if request.user.has_perm('rss.add_teb_board'):
-				data['teb_form']=teb_board_form	
-			if request.user.has_perm('rss.can_approve_teb_board'):
+			if request.user.has_perm('rss.add_notice'):
+				data['teb_form']=notice_form	
+			if request.user.has_perm('rss.can_approve_notice'):
 				data['not_cleared']=teb.objects.filter(pub_date__gte=timezone.now()).filter(approved=False)
 	now=timezone.now()
 	one_month_back=datetime.datetime(now.date().year,now.date().month-1,now.date().day,now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
@@ -31,7 +31,7 @@ def approve_notices(request):
 	try:
 		if request.user.is_authenticated():
 			if request.user.is_active:
-				if request.user.has_perm('rss.can_approve_teb_board'):
+				if request.user.has_perm('rss.can_approve_notice'):
 					not_cleared_notices=teb.objects.filter(approved=False).filter(pub_date__gte=timezone.now())
 					post_keys=request.POST.keys()
 					post_keys.remove('csrfmiddlewaretoken')
@@ -60,10 +60,10 @@ def notice(request,docid):
 @login_required
 def add_new(request):
 	if request.user.is_authenticated():
-		if (not request.user.is_active)or(not request.user.has_perm('rss.add_teb_board')):
+		if (not request.user.is_active)or(not request.user.has_perm('rss.add_notice')):
 			return redirect('news_home')
 	#user is now authentic
-	form=teb_board_form(request.POST)# A form bound to the POST data
+	form=notice_form(request.POST)# A form bound to the POST data
 	if form.is_valid():# All validation rules pass
 		# Process the data in form.cleaned_data
 		# ...

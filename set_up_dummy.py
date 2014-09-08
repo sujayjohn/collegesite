@@ -17,7 +17,12 @@ from django.core.management import execute_from_command_line
 execute_from_command_line(['manage.py','syncdb'])
 
 
-groupnames=['Administration','Staff Advisor','Faculty']
+groupnames=[{'name':'Administration',
+		'permissions':['docs.change_doc','docs.add_doc']}
+		,{'name':'Staff Advisor',
+		'permissions':['roombook.add_reservation','rss.add_notice']},
+		{'name':'Faculty',
+		'permissions':[]}]
 users=['staff_adv_1','staff_adv_2','office_window_1','office_window_2','office_inside_1','office_inside_2','notice_admin','registrar_of_soc']
 papers=[
 	{'code':'MAPT-101','name':'Mathematics first year'},
@@ -39,13 +44,31 @@ quotes=['He who has failed has tried something greater...',
 	'Ask and you are no longer a fool...',]
 doctypes=['transcript','character_certificate','bonafide_certificate']
 rooms=['A','B','C','U','R','Xc','Xd','OPLT','NPLT','PTR','CTR','Auditorium','Seminar Room','G','NCLT']
+
+notifications=[
+		'Dummy1','Dummy2','Dummy3','Dummy4','Dummy5','Dummy6','Dummy7','Dummy8','Dummy9','Dummy10',
+		]
+news=['Dummy news 1','Dummy news 2','Dummy news 3','Dummy news 4','Dummy news 6','Dummy news 7','Dummy news 8','Dummy news 9',]
+
+
 print '===================================================='
 print 'setting up dummy data'
 print 'starting'
+
+	
+
+#make notifications
+for i in notifications:
+	a=college.models.custom_notice()
+	a.title=i
+	a.save()
+print 'Notifications added'
+
+
 #make groups
 for i in groupnames:
 	g1=Group()
-	g1.name=i
+	g1.name=i['name']
 	g1.save()
 print 'Groups Added'
 #add papers
@@ -93,6 +116,20 @@ for i in users:
 		b.staff_adv1=random.choice(college.models.society.objects.all())
 	b.save()
 print 'Users added'
+
+#make notices
+for i in news:
+	a=rss.models.notice()
+	a.heading=i
+	a.description='Lorem ipsum dolor smit'
+	x=college.models.userprofile.objects.all()
+	a.author=random.choice(x)
+	a.approved=True
+	a.save()
+print 'News added'
+
+
+
 #make students
 for i in students:
 	a=college.models.student()

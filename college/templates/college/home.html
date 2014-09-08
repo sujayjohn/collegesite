@@ -15,11 +15,6 @@ image_src_list.push('{% static "college/images/homepage/"|add:name %}' );
 
 {%block body%}
 
-	{%if quote_of_the_day%}
-	<div id='quote' class='homedock'>
-		{{quote_of_the_day.value}}
-	</div>
-	{%endif%}
 <div id='images_dock'>
 	<img id='top_pic' src='{% static "college/images/homepage/Elisha Bhattarai.jpg" %}' alt='' width=100% height=500px></img>
 	<img id='bottom_pic' src='{% static "college/images/homepage/Satender Singh (2).jpg" %}' alt='' width=100% height=500px></img>
@@ -36,29 +31,44 @@ image_src_list.push('{% static "college/images/homepage/"|add:name %}' );
 		</ul>
 	</div>
 	<div id='news' class='homedock'>
-	<a href='{%url 'news_home'%}'>NEWS</a><hr>
+	<a href='{%url 'news_home'%}'>NEWS FEED</a><hr>
 		<ul>
 			{%for n in news%}
-			<a href='{%url "notice" n.id%}'><li>{{n.heading}}</li></a>
+			<a href='{%url "notice" n.id%}'><li>{{n.heading|truncatewords:"20"}}</li></a>
 			{%endfor%}
+			<a href='{%url 'news_home'%}'><li>more...</li></a>
 		</ul>
 	</div>
 	
 	<div id='permanent_links' class='homedock'>
 	NOTIFICATIONS<hr>
 		<ul>
-			<li>Admissions 2014 <image width=25 src='{%static "college/images/new-animated.gif"%}'></img></li>
-			<li>Rudra dinner</li>
-			{%if admission_list%}
-				{%for i in admission_list%}
-					<a target='_blank' href='{{i.list_doc.url}}'>{{i.name}}</a>
+			{%for i in notifications%}
+					<li>
+					{%if i.associated_file%}<a target='_blank' href='{{i.associated_file.url}}'>{%endif%}
+					{{i.title|truncatewords:"20"}}
+					
+					{%if i.recent%}
+					<image width=25 src='{%static "college/images/new-animated.gif"%}'></img>
+					{%endif%}
+					{%if i.associated_file%}
+					</a>
+					{%endif%}
+					</li>
 				{%endfor%}
-			{%endif%}
+			<a><li>more...</li></a>
+
 		</ul>
 	</div>
 	<div id='events' class='homedock'>
-	EVENTS<hr>
-		<iframe width=100% height=100% src="//www.youtube.com/embed/fB4mKTNgp00" frameborder="0" allowfullscreen></iframe>
+	<a href='{%url "events_home"%}'>EVENTS</a><hr>
+		<ul>
+			{%for i in events%}
+			<a><li></li></a>
+			<iframe width=100% height=100% src="//www.youtube.com/embed/fB4mKTNgp00" frameborder="0" allowfullscreen></iframe>
+			{%endfor%}
+			<a href='{%url "events_home"%}'><li>more...</li></a>
+		</ul>
 	</div>
 	
 	
