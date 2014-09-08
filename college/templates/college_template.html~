@@ -31,7 +31,7 @@
 	</div>
 	<hr>
 
-	<div>
+	
 		<div id='navigation'>
 				<ul>
 					<a href='{%url 'college_home'%}'><li>Home</li></a>
@@ -41,7 +41,7 @@
 					<a href='{%url 'department_home'%}'><li>Departments</li></a>
 					<a href='{%url 'archive_home'%}'><li>Archives</li></a>
 					<a href='{%url 'alumni_home'%}'><li>Alumni</li></a>
-					<a href='{%url 'contact_us'%}'><li>Contact Us</li></a>
+					<a href='{%url 'contact_us'%}'><li>Contact </li></a>
 				</ul>
 			
 			
@@ -52,8 +52,7 @@
 				{%else%}
 					<a href=' {% url 'django.contrib.auth.views.login'%}'>Login</a>
 				{%endif%}
-		</div>
-	</div>
+				</div>
 				
 <hr>
 	<div id='body_content'>
