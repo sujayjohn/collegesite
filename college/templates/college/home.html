@@ -23,7 +23,7 @@ image_src_list.push('{% static "college/images/homepage/"|add:name %}' );
 	<div id='applications' class='homedock'>
 	APPLICATIONS<hr>
 		<ul>
-			<a href='{%url 'docs_home'%}' ><li>Document Tracking</li></a>
+			<a href='{%url 'docs_home'%}' ><li>Office</li></a>
 			<a href='http://sscattendance.formistry.com/report/'><li>Attendence</li></a>
 			<a href='{%url 'roombook_home'%}'><li>Room Booking</li></a>
 			<a href='{%url 'news_home'%}'><li>Notice Board</li></a>
@@ -49,7 +49,7 @@ image_src_list.push('{% static "college/images/homepage/"|add:name %}' );
 					{{i.title|truncatewords:"20"}}
 					
 					{%if i.recent%}
-					<image width=25 src='{%static "college/images/new-animated.gif"%}'></img>
+					<image width=25 src='{%static "college/images/new-animated.gif"%}' alt='*'></img>
 					{%endif%}
 					{%if i.associated_file%}
 					</a>
@@ -70,7 +70,10 @@ image_src_list.push('{% static "college/images/homepage/"|add:name %}' );
 			<a href='{%url "events_home"%}'><li>more...</li></a>
 		</ul>
 	</div>
-	
+	<div id='oldsite' class='homedock'>
+	<a href='{%url "events_home"%}'>Where is the old site?</a><hr>
+
+	</div>
 	
 <script>
 var top_pic=document.getElementById('top_pic');

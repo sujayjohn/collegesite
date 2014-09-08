@@ -36,7 +36,7 @@ def home(request):
 	notices=notice.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).order_by('-pub_date')[:5]
 	data['news']=notices
 
-	lists=college_models.custom_notice.objects.filter(alive=True).filter(pub_date__lte=timezone.now())[:5]
+	lists=college_models.custom_notice.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 	data['notifications']=lists
 
 	return render(request,'college/home.html',data)

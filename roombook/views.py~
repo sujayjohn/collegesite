@@ -38,17 +38,19 @@ def home(request):
 			tm_to['day']=r.time_to.date().day
 			tm_to['hour']=r.time_to.time().hour
 			tm_to['minute']=r.time_to.time().minute
-			
-			by=r.booked_by.staff_adv1.name
-			tm=[tm_from,tm_to,by]
+			if r.booked_by.staff_adv1!=None:
+				by=r.booked_by.staff_adv1.name
+				tm=[tm_from,tm_to,by]
 			
 			revs_representation.append(tm)
 		#-------------------------------
 		x['reservations']=revs_representation
 		listed_rooms.append(x)
-	if request.user.has_perm('roombook.can_approve_reservation'):
+	if (request.user.has_perm('roombook.change_reservation'))and(request.user.is_active):
 		not_cleared_reservations=reservation.objects.filter(approved=False).filter(time_from__gte=timezone.now())
 		data['not_cleared']=not_cleared_reservations
+	else:
+		print '--------------'
 	data['room_data']=json.dumps(listed_rooms)
 	return render(request,'roombook/home.html',data)
 
@@ -56,7 +58,7 @@ def home(request):
 @require_http_methods(['POST'])
 def approve_reservations(request):
 	if request.user.is_active:
-		if request.user.has_perm('roombook.can_approve_reservation'):
+		if request.user.has_perm('roombook.change_reservation'):
 			not_cleared_reservations=reservation.objects.filter(approved=False).filter(time_from__gte=timezone.now())
 			post_keys=request.POST.keys()
 			post_keys.remove('csrfmiddlewaretoken')

@@ -1,13 +1,14 @@
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
-from rss.models import *
+from rss import models
+from django.utils import timezone
 
-class TEB(Feed):
+class notice(Feed):
 	title="Notices for college"
 	link="/news/"
 	description="Updates on the college Today's Engagement notice board."
 	def items(self):
-		return teb_board.objects.filter(approved=True).filter(pub_date__lte=timezone.now()).order_by('pub_date')[:10]
+		return models.notice.objects.filter(approved=True).filter(pub_date__lte=timezone.now()).order_by('pub_date')[:10]
 	def item_title(self,item):
 		return item.heading
 	def item_description(self,item):

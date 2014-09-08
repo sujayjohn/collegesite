@@ -29,8 +29,7 @@ class reservation(models.Model):
 	time_from=models.DateTimeField(default=timezone.now())
 	time_to=models.DateTimeField(default=timezone.now())
 	approved=models.BooleanField(default=False)
-	class Meta:
-		permissions=(('can_approve_reservation','Can approve a room booking'),)
+	
 class reservation_form(ModelForm):
 	class Meta:
 		model=reservation

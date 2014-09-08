@@ -43,16 +43,16 @@
 					<a href='{%url 'alumni_home'%}'><li>Alumni</li></a>
 					<a href='{%url 'contact_us'%}'><li>Contact Us</li></a>
 				</ul>
-			<div id='status_bar'>
+			
+			
+		</div>
+		<div id='status_bar'>
 				{%if user.is_authenticated%}
-					{{user.username}}
-						<a href=' {% url 'django.contrib.auth.views.logout'%}'>Logout</a>
+					{{user.username}}<a href=' {% url 'django.contrib.auth.views.logout'%}'>Logout</a>
 				{%else%}
 					<a href=' {% url 'django.contrib.auth.views.login'%}'>Login</a>
 				{%endif%}
 				</div>
-			
-		</div>
 				
 <hr>
 	<div id='body_content'>

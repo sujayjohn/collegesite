@@ -19,7 +19,7 @@ class notice(models.Model):
 		data={}
 		data['Title']=self.heading
 		data['Date']=str(self.pub_date.year)+'/'+str(self.pub_date.month)+'/'+str(self.pub_date.day)
-		data['From']=self.soc.name
+		data['From']=self.soc.name if self.soc!=None else ''
 		data['Signed']=self.author.user.username
 		data['Description']=self.description[:100]
 		return data
