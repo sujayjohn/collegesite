@@ -10,7 +10,7 @@ class notice_feed(Feed):
 	def items(self):
 		return models.notice.objects.filter(approved=True).filter(pub_date__lte=timezone.now()).order_by('pub_date')[:10]
 	def item_title(self,item):
-		return item.heading
+		return item.title
 	def item_description(self,item):
 		return item.description[:30]+' ...'
 	def item_link(self,item):

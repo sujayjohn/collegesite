@@ -14,8 +14,8 @@
 		{{notice.description}}
 		
 		{%if notice.associated_file%}
-		<hr>
-		<a href='{{notice.associated_file.url}}' target='_blank'>Document Link</a>
+			<hr>
+			<a href='{{notice.associated_file.url}}' target='_blank'>Document Link</a>
 		{%endif%}
 </div>
 
