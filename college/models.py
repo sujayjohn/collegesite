@@ -9,7 +9,7 @@ class document(models.Model):
 	def __unicode__(self):
 		return self.title
 	title=models.CharField(max_length=100)
-	associated_file=models.FileField(upload_to='files',null=True,blank=True)
+	associated_file=models.FileField(upload_to='files',blank=True,null=True,default=None)
 	alive=models.BooleanField(default=True)
 
 

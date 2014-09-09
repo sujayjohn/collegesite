@@ -10,43 +10,50 @@
 <div id='clear_selected'>
 	<form id='notics_approval_form' action='{%url "notices_approve"%}' method='post'>
 	{%csrf_token%}
-	{%for i in not_cleared%}
-	<input type='checkbox' name={{i.id}} id={{i.id}}>
-	<p>
-	{{i.heading}}<br>{{i.pub_date}}<br>{{i.description}}<br>{{i.author.user.username}}
-	</p>
-	</input><br>
+	{%for val in not_cleared%}
+	<a href='{%url "notice" val.id%}'>
+	<div class='notice'>
+		<h3><input type='checkbox' name={{val.id}} id={{val.id}}>
+		
+		{{val.title}}<p class='subtext'>
+			<i>{{val.pub_date|date:'d F Y'}}</i></p><hr></h3>
+			{{val.description|truncatewords:'10'}}
+		
+	</div>
+	</a>
+		
+
 	{%endfor%}
+	<br>
 	<input type='submit' value='Approve Selected'></input>
 	</form>
 </div>
 <hr>
 {%endif%}
 
-	{%if teb_form%}
+	{%if notice_form%}
 	<div id='create_notice'>
-		<form action='{%url "notice_add_new"%}' method='post'>
+	{% if form.is_multipart %}
+	<form enctype="multipart/form-data" action='{%url "notice_add_new"%}' method='post'>
+	{%else%}
+	<form action='{%url "notice_add_new"%}' method='post'>
+	{%endif%}
+
 		{%csrf_token%}
-		{{teb_form}}
+		{{notice_form}}
 		<input type='submit' value='submit notice'></input>
 		</form>
 	</div>
 	{%endif%}
 	<div style='overflow:auto;text-shadow:2%;'>
 		{%for val in noticeboard%}
-		{%if val.associated_file%}
-		<a href='{{val.associated_file.url}}'>
-		{%endif%}
+		<a href='{%url "notice" val.id%}'>
 		<div class='notice'>
-		<h3>{{val.title}}		<p class='subtext'>
+		<h3>{{val.title}}<p class='subtext'>
 		<i>{{val.pub_date|date:'d F Y'}}</i></p><hr></h3>
-
-		{{val.description|truncatewords:'10'}}
-		
+		{{val.description|truncatewords:"10"}}
 		</div>
-		{%if val.associated_file%}
 		</a>
-		{%endif%}
 		{%endfor%}
 	</div>
 {%endblock%}

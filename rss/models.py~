@@ -11,8 +11,6 @@ class notice(document):
 	approved=models.BooleanField(default=False)
 	submission_date=models.DateField(default=timezone.now())
 	
-	class Meta:
-		permissions=(('can_approve_teb_board',"Can approve a Today's Engagement Board notice"),)
 		
 class notice_form(ModelForm):
 	class Meta:

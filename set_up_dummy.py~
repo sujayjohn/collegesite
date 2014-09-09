@@ -123,12 +123,11 @@ for i in news:
 	a.title=i
 	a.description=''
 	alphabet='qwertyui  opasdfg   hjklzxcvbnm      '
-	for i in xrange(int(random.random()*100)):
+	for i in xrange(int(random.random()*1000)):
 		a.description+=random.choice(alphabet)
 	x=college.models.userprofile.objects.all()
 	a.author=random.choice(x)
 	a.approved=True
-	
 	a.save()
 print 'News added'
 

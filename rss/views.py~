@@ -13,8 +13,9 @@ def home(request):
 		if request.user.is_active:
 			if request.user.has_perm('rss.add_notice'):
 				data['notice_form']=notice_form	
-			if request.user.has_perm('rss.can_approve_notice'):
+			if request.user.has_perm('rss.change_notice'):
 				data['not_cleared']=notice.objects.filter(pub_date__gte=timezone.now()).filter(approved=False).filter(alive=True)
+
 	now=timezone.now()
 	one_month_back=datetime.datetime(now.date().year,now.date().month-1,now.date().day,now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
 	notices=notice.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).order_by('-pub_date')
@@ -25,10 +26,11 @@ def home(request):
 @login_required
 @require_http_methods(['POST'])
 def approve_notices(request):
+
 	try:
 		if request.user.is_authenticated():
 			if request.user.is_active:
-				if request.user.has_perm('rss.can_approve_notice'):
+				if request.user.has_perm('rss.change_notice'):
 					not_cleared_notices=notice.objects.filter(approved=False).filter(pub_date__gte=timezone.now())
 					post_keys=request.POST.keys()
 					post_keys.remove('csrfmiddlewaretoken')
@@ -51,14 +53,14 @@ def notice_view(request,docid):
 		print e
 		data['notice']={'Notice ID ':'Not Available'}	
 	else:
-		data['notice']=obj.pretty_print()
+		data['notice']=obj
 	return render(request,'rss/notice.html',data)
 
 @login_required
 def add_new(request):
-	if request.user.is_authenticated():
-		if (not request.user.is_active)or(not request.user.has_perm('rss.add_notice')):
-			return redirect('news_home')
+
+	if (not request.user.is_active)or(not request.user.has_perm('rss.add_notice')):
+		return redirect('news_home')
 	#user is now authentic
 	form=notice_form(request.POST)# A form bound to the POST data
 	if form.is_valid():# All validation rules pass
@@ -68,5 +70,5 @@ def add_new(request):
 		obj.author=request.user.userprofile
 		obj.save()
 	else:
-		print 'form not valid>>>>>'
+		print 'form validation failed'
 	return redirect('news_home')

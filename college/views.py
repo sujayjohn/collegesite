@@ -54,7 +54,7 @@ def home(request):
 	
 	now=timezone.now()
 	one_month_back=datetime.datetime(now.date().year,now.date().month-1,now.date().day,now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
-	notices=notice.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).filter(alive=True).order_by('-pub_date')[:5]
+	notices=notice.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).filter(alive=True).order_by('-pub_date','-id')[:5]
 	data['news']=notices
 
 	lists=college_models.custom_notice.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
