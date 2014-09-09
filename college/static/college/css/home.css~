@@ -1,6 +1,24 @@
-#images_dock 
-{
-height:500px;
+#slideshow {
+    position:relative;
+    height:500px;
+    
+}
+
+#slideshow IMG {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:8;
+    height:500px;
+    width:100%;
+}
+
+#slideshow IMG.active {
+    z-index:10;
+}
+
+#slideshow IMG.last-active {
+    z-index:9;
 }
 #body_content div
 {
@@ -13,7 +31,7 @@ margin-left:0.1%;
 text-align:center;
 float:left;
 margin-right:5px;
-width:20%;
+width:19%;
 height:80%;
 overflow:auto;
 position:relative;

@@ -3,21 +3,17 @@
 {%block header%}
 {% load staticfiles%}
 <link rel="stylesheet" type="text/css" href='{% static "/static/college/css/home.css"%}'>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
 <script type="text/javascript" src="{% static "college/home.js" %}" ></script>
 
-<script>
-var image_src_list=[]
-	{% for name in picture_gallery%}
-image_src_list.push('{% static "college/images/homepage/"|add:name %}' );
-	{%endfor%}
-</script>
 {%endblock%}
 
 {%block body%}
 
-<div id='images_dock'>
-	<img id='top_pic' src='{% static "college/images/homepage/Elisha Bhattarai.jpg" %}' alt='' width=100% height=500px></img>
-	<img id='bottom_pic' src='{% static "college/images/homepage/Satender Singh (2).jpg" %}' alt='' width=100% height=500px></img>
+<div id='slideshow'>
+	{% for name in picture_gallery%}
+	<img src='{% static "college/images/homepage/"|add:name %}' alt=''></img>
+	{%endfor%}
 </div>
 <hr>
 	<div id='applications' class='homedock'>
@@ -72,7 +68,7 @@ image_src_list.push('{% static "college/images/homepage/"|add:name %}' );
 	</div>
 	<div id='oldsite' class='homedock'>
 	<a href='{%url "events_home"%}'>Where is the old site?</a><hr>
-		<hr>
+
 	</div>
 	
 <script>
