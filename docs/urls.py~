@@ -8,6 +8,6 @@ urlpatterns = patterns('',
     url(r'^office/',views.office,name='docs_office'),
     url(r'^add$',views.add,name='docs_add'),
     url(r'^edit$',views.edit),
-    url(r'^new/(?P<docid>\d+)',views.newly_added,name='newly_added'),
+    url(r'^new/(?P<docid>\d+)',views.newly_added,name='docs_newly_added'),
 
 )

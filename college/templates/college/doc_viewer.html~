@@ -1,0 +1,12 @@
+{%extends 'college_template.html'%}
+{%block header%}
+
+{%endblock%}
+{%block body%}
+{%if document%}
+
+
+{%else%}
+The document you requested does not exist.
+{%endif%}
+{%endblock%}

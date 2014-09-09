@@ -4,15 +4,17 @@ from django.utils import timezone
 import datetime
 
 
-'''
-<iframe src="http://docs.google.com/gview?url=http://path.com/to/your/pdf.pdf&embedded=true"style="width:600px; height:500px;" frameborder="0"></iframe>
-'''
-class custom_notice(models.Model):
+
+class document(models.Model):
 	def __unicode__(self):
 		return self.title
 	title=models.CharField(max_length=100)
 	associated_file=models.FileField(upload_to='files',null=True,blank=True)
 	alive=models.BooleanField(default=True)
+
+
+class custom_notice(document):
+
 	pub_date=models.DateTimeField(default=timezone.now())
 	def recent(self):
 		now=timezone.now()

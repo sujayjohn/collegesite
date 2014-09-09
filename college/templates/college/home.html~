@@ -9,12 +9,13 @@
 {%endblock%}
 
 {%block body%}
-
+{%if picture_gallery%}
 <div id='slideshow'>
 	{% for name in picture_gallery%}
 	<img src='{% static "college/images/homepage/"|add:name %}' alt=''></img>
 	{%endfor%}
 </div>
+{%endif%}
 <hr>
 	<div id='applications' class='homedock'>
 	APPLICATIONS<hr>

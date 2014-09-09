@@ -6,6 +6,28 @@ import college.models as college_models
 from rss.models import *
 import random
 
+def document(request,docid):
+	docid=int(docid)
+	data={}
+	try:
+		d=college_models.document.objects.get(id=docid)
+		if d.alive==True:
+			data['document']=d
+		else:
+			print 'Document is not alive.'
+	except Exception as e:
+		try:
+			d=college_models.custom_notice.objects.get(id=docid)
+			if d.alive==True:
+				data['document']=d
+			else:
+				print 'Document is not alive.'
+		except Exception as et:
+			print 'Document with ID',docid,' does not exist'
+			print e
+			print et
+	return render(request,'college/doc_viewer.html',data)
+
 def home(request):
 	'''returns the home page'''
 	#record the client data
@@ -36,7 +58,7 @@ def home(request):
 	notices=notice.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).order_by('-pub_date')[:5]
 	data['news']=notices
 
-	lists=college_models.custom_notice.objects.filter(alive=True).filter(pub_date__lte=timezone.now())[:5]
+	lists=college_models.custom_notice.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 	data['notifications']=lists
 
 	return render(request,'college/home.html',data)

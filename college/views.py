@@ -6,6 +6,27 @@ import college.models as college_models
 from rss.models import *
 import random
 
+def document(request,docid):
+	data={}
+	try:
+		d=college_models.document.objects.get(id=docid)
+		if d.alive==True:
+			data['document']=d
+		else:
+			print 'Document is not alive.'
+	except Exception as e:
+		try:
+			d=college_models.custom_notice.objects.get(id=docid)
+			if d.alive==True:
+				data['document']=d
+			else:
+				print 'Document is not alive.'
+		except Exception as et:
+			print 'Document with ID',docid,' does not exist'
+			print e
+			print et
+	return render(request,'college/doc_viewer.html',data)
+
 def home(request):
 	'''returns the home page'''
 	#record the client data

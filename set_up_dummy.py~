@@ -124,7 +124,7 @@ for i in news:
 	a.description='Lorem ipsum dolor smit'
 	x=college.models.userprofile.objects.all()
 	a.author=random.choice(x)
-	a.approved=True;
+	a.approved=True
 	a.save()
 print 'News added'
 
