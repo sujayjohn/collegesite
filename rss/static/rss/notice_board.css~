@@ -1,0 +1,14 @@
+.notice
+{
+float:left;
+margin:1%;
+font-size:small;
+width:15%;
+background:rgba(110, 154, 174, 1);
+}
+.notice .subtext, .notice h3
+{
+margin:0px;
+padding:0px;
+text-align:right;
+}

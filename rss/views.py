@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_safe,require_http_methods
-from rss.models import notice as teb
+from rss.models import notice
 from rss.models import notice_form
 from django.utils import timezone
 import datetime
@@ -12,15 +12,12 @@ def home(request):
 	if request.user.is_authenticated():
 		if request.user.is_active:
 			if request.user.has_perm('rss.add_notice'):
-				data['teb_form']=notice_form	
+				data['notice_form']=notice_form	
 			if request.user.has_perm('rss.can_approve_notice'):
-				data['not_cleared']=teb.objects.filter(pub_date__gte=timezone.now()).filter(approved=False)
+				data['not_cleared']=notice.objects.filter(pub_date__gte=timezone.now()).filter(approved=False).filter(alive=True)
 	now=timezone.now()
 	one_month_back=datetime.datetime(now.date().year,now.date().month-1,now.date().day,now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
-	notices=teb.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).order_by('-pub_date')
-	dat=[]
-	for i in notices:		
-		dat.append(i.pretty_print())
+	notices=notice.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).order_by('-pub_date')
 	data['noticeboard']=notices
 	
 	return render(request,'rss/notice_board.html',data)
@@ -32,7 +29,7 @@ def approve_notices(request):
 		if request.user.is_authenticated():
 			if request.user.is_active:
 				if request.user.has_perm('rss.can_approve_notice'):
-					not_cleared_notices=teb.objects.filter(approved=False).filter(pub_date__gte=timezone.now())
+					not_cleared_notices=notice.objects.filter(approved=False).filter(pub_date__gte=timezone.now())
 					post_keys=request.POST.keys()
 					post_keys.remove('csrfmiddlewaretoken')
 					for i in not_cleared_notices:
@@ -46,10 +43,10 @@ def approve_notices(request):
 		
 	
 	
-def notice(request,docid):
+def notice_view(request,docid):
 	data={}
 	try:
-		obj=teb.objects.get(id=int(docid))
+		obj=notice.objects.get(id=int(docid))
 	except Exception as e:
 		print e
 		data['notice']={'Notice ID ':'Not Available'}	

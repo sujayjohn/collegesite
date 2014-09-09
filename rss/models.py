@@ -3,11 +3,7 @@ from django.utils import timezone
 from college.models import *
 from django.forms import ModelForm
 
-class notice(models.Model):
-	def __unicode__(self):
-		return str(self.heading)
-	
-	heading=models.CharField(max_length=50)
+class notice(document):
 	pub_date=models.DateField('Publication Date',default=timezone.now())
 	soc=models.ForeignKey(society,null=True,blank=True)
 	description=models.CharField(max_length=800)
@@ -15,18 +11,10 @@ class notice(models.Model):
 	approved=models.BooleanField(default=False)
 	submission_date=models.DateField(default=timezone.now())
 	
-	def pretty_print(self):
-		data={}
-		data['Title']=self.heading
-		data['Date']=str(self.pub_date.year)+'/'+str(self.pub_date.month)+'/'+str(self.pub_date.day)
-		data['From']=self.soc.name if self.soc!=None else ''
-		data['Signed']=self.author.user.username
-		data['Description']=self.description[:100]
-		return data
 	class Meta:
 		permissions=(('can_approve_teb_board',"Can approve a Today's Engagement Board notice"),)
 		
 class notice_form(ModelForm):
 	class Meta:
 		model=notice
-		fields=['heading','soc','description','pub_date']
+		fields=['title','soc','description','pub_date','associated_file']

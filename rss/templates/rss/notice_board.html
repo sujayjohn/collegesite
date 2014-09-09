@@ -1,4 +1,10 @@
 {% extends 'college_template.html'%}
+
+{%block header%}
+{% load staticfiles%}
+<link rel="stylesheet" type="text/css" href='{% static "rss/notice_board.css"%}'>
+{%endblock%}
+
 {%block body%}
 {%if not_cleared%}
 <div id='clear_selected'>
@@ -26,27 +32,21 @@
 		</form>
 	</div>
 	{%endif%}
-	<div style='overflow:auto;'>
-		<style>
-		table
-		{
-		text-align:left;color:white;border:1px solid white;border-radius:5px;
-		}
-		td
-		{
-		border-right:1px solid white;
-		}
-		
-		</style>
+	<div style='overflow:auto;text-shadow:2%;'>
 		{%for val in noticeboard%}
-		<table>
-			<tr>
-				<tr><td>Subject</td><td>{{val.heading}}</td></tr>
-				<tr><td>Description</td><td>{{val.description}}</td></tr>
-				<tr><td>Published on</td><td>{{val.pub_date}}</td></tr>
-				<tr><td>Signed</td><td>{{val.author}}</td></tr>
-		</table>
-		<hr>
+		{%if val.associated_file%}
+		<a href='{{val.associated_file.url}}'>
+		{%endif%}
+		<div class='notice'>
+		<h3>{{val.title}}<p class='subtext'>
+		<i>{{val.pub_date|date:'d F Y'}}</i></p><hr></h3>
+
+		{{val.description|truncatewords:'10'}}
+		
+		</div>
+		{%if val.associated_file%}
+		</a>
+		{%endif%}
 		{%endfor%}
 	</div>
 {%endblock%}

@@ -31,7 +31,7 @@
 	<a href='{%url 'news_home'%}'>NEWS FEED</a><hr>
 		<ul>
 			{%for n in news%}
-			<a href='{%url "notice" n.id%}'><li>{{n.heading|truncatewords:"20"}}</li></a>
+			<a href='{%url "notice" n.id%}'><li>{{n.title|truncatewords:"5"}}</li></a>
 			{%endfor%}
 			<a href='{%url 'news_home'%}'><li>more...</li></a>
 		</ul>

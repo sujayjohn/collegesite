@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from rss import models
 from django.utils import timezone
 
-class notice(Feed):
+class notice_feed(Feed):
 	title="Notices for college"
 	link="/news/"
 	description="Updates on the college Today's Engagement notice board."

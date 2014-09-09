@@ -120,11 +120,15 @@ print 'Users added'
 #make notices
 for i in news:
 	a=rss.models.notice()
-	a.heading=i
-	a.description='Lorem ipsum dolor smit'
+	a.title=i
+	a.description=''
+	alphabet='qwertyui  opasdfg   hjklzxcvbnm      '
+	for i in xrange(int(random.random()*100)):
+		a.description+=random.choice(alphabet)
 	x=college.models.userprofile.objects.all()
 	a.author=random.choice(x)
 	a.approved=True
+	
 	a.save()
 print 'News added'
 
