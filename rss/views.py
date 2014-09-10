@@ -51,9 +51,12 @@ def notice_view(request,docid):
 		obj=notice.objects.get(id=int(docid))
 	except Exception as e:
 		print e
-		data['notice']={'Notice ID ':'Not Available'}	
+		data['notice']={'title':'Not Available','description':'','pub_date':None}	
 	else:
-		data['notice']=obj
+		if obj.alive:
+			data['notice']=obj
+		else:
+			data['notice']={'title':'Not Available','description':'','pub_date':None}	
 	return render(request,'rss/notice.html',data)
 
 @login_required
