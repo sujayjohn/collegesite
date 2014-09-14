@@ -34,7 +34,7 @@
 			<h3>{{notice.title}}<p class='subtext'>
 			<i>{{notice.pub_date|date:'d F Y'}}</i></p><hr></h3>
 
-			{{notice.description|truncatewords:'20'}}
+			{{notice.description|truncatewords:'10'}}
 		
 			{%if notice.associated_file%}
 				<hr>
