@@ -80,6 +80,26 @@ def clg_admin(request):
 
 
 	return render(request,'college/clg_admin.html',data)
+	
+def notification_view(request,docid=None):	
+	data={}
+	if docid!=None:
+		try:
+			obj=college_models.custom_notice.objects.get(id=int(docid))
+		except Exception as e:
+			print e
+			data['notice']={'title':'Not Available','description':'','pub_date':None}	
+		else:
+			if obj.alive:
+				data['notice']=obj
+			else:
+				data['notice']={'title':'Not Available','description':'','pub_date':None}	
+	else:
+		notifications=college_models.custom_notice.objects.filter(pub_date__lte=timezone.now()).filter(alive=True).order_by('-pub_date','-id')
+		data['notifications']=list(notifications)
+	return render(request,'college/notifications_view.html',data)
+	
+	
 def archive(request):
 	data={}
 	return render(request,'college/archive_home.html',data)

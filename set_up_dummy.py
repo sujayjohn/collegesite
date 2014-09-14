@@ -62,6 +62,10 @@ print 'starting'
 for i in notifications:
 	a=college.models.custom_notice()
 	a.title=i
+	a.description=''
+	alphabet='qwertyui  opasdfg   hjklzxcvbnm      '
+	for i in xrange(int(random.random()*800)):
+		a.description+=random.choice(alphabet)
 	a.save()
 print 'Notifications added'
 
@@ -144,13 +148,11 @@ for i in students:
 print 'Students added'
 #add a contact
 a=college.models.contact()
-a.purpose='General'
 a.name='Phone'
 a.value='+91-11-2766 7271 '
 a.save()
 a=college.models.contact()
-a.purpose='Admission Help Line'
-a.name='Phone'
+a.name='Admission Help Line'
 a.value='011-27662168'
 a.save()
 print 'Contacts added'

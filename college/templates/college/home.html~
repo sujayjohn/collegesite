@@ -28,7 +28,14 @@
 		</ul>
 	</div>
 	<div id='news' class='homedock'>
-	<a href='{%url 'news_home'%}'>NEWS FEED</a><hr>
+	<a href='{%url 'news_home'%}'>NEWS FEED</a>
+		<div id='icons'>
+				<a href='{%url 'news_rss'%}'>
+				<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
+				</a>
+				
+		</div>
+		<hr>
 		<ul>
 			{%for n in news%}
 			<a href='{%url "notice" n.id%}'><li>{{n.title|truncatewords:"5"}}</li></a>
@@ -38,19 +45,25 @@
 	</div>
 	
 	<div id='permanent_links' class='homedock'>
-	NOTIFICATIONS<hr>
+	<a href='{%url "notification_view"%}'>NOTIFICATIONS</a>
+	<div id='icons'>
+				<a href='{%url 'notification_rss'%}'>
+				<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
+				</a>
+				
+	</div>
+	
+	
+	<hr>
 		<ul>
 			{%for i in notifications%}
 					<li>
-					{%if i.associated_file%}<a target='_blank' href='{{i.associated_file.url}}'>{%endif%}
-					{{i.title|truncatewords:"20"}}
-					
+					<a href='{%url "notification_view" i.id%}'>
+					{{i.title|truncatewords:"3"}}
 					{%if i.recent%}
-					<image width=25 src='{%static "college/images/new2.gif"%}' alt='*'></img>
+					<image width=25 async='' src='{%static "college/images/new2.gif"%}' alt='*'></img>
 					{%endif%}
-					{%if i.associated_file%}
 					</a>
-					{%endif%}
 					</li>
 				{%endfor%}
 			<a><li>more...</li></a>

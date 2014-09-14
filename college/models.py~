@@ -14,7 +14,7 @@ class document(models.Model):
 
 
 class custom_notice(document):
-
+	description=models.CharField(max_length=800)
 	pub_date=models.DateTimeField(default=timezone.now())
 	def recent(self):
 		now=timezone.now()
@@ -98,8 +98,7 @@ class student(models.Model):
 	
 class contact(models.Model):
 	def __unicode__(self):
-		return self.purpose+'  -----  '+self.name+'  ----  '+self.value
-	purpose=models.CharField(max_length=50)
+		return self.name+'  ----  '+self.value
 	name=models.CharField(max_length=50)
 	value=models.CharField(max_length=50)
 

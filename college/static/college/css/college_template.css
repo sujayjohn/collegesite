@@ -125,5 +125,6 @@ text-align:right;
 .subtext
 {
 font-size:8pt;
-
 }
+.even_row
+{background:lightblue;}

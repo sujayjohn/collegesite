@@ -96,7 +96,7 @@ font-size:medium;
 }
 #navigation a
 {
-background:rgba(28, 48, 57, 1);
+
 color:white;
 float:left;
 border-radius:5px;
@@ -125,5 +125,5 @@ text-align:right;
 .subtext
 {
 font-size:8pt;
-
 }
+

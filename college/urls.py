@@ -4,6 +4,7 @@ from college import views
 
 urlpatterns = patterns('',
     url(r'^$',views.home,name='college_home'),
+    url(r'^notification/(?P<docid>\d+)?',views.notification_view,name='notification_view'),
     url(r'^administration$',views.clg_admin,name='clg_admin'),
     url(r'^document/(?P<docid>\d+)',views.document,name='document_view'),
     url(r'^society/(?P<soc_name>\S+)?/?',views.society,name='society_home'),

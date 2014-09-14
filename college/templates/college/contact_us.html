@@ -1,20 +1,16 @@
 {%extends 'college_template.html'%}
+
+
 {%block body%}
 
 
 {%if contacts%}
 <table>
-<thead style='background-color:lightblue;text-align:center;'>
-<td>Purpose</td><td>Facilitator</td><td>Detail</td>
-</thead>
-<tbody>
 {%for i in contacts%}
-<tr>
-<td>{{i.purpose}}</td><td>{{i.name}}</td><td>{{i.value}}</td>
+<tr {%if not forloop.counter|divisibleby:"2"%}class='even_row' {%endif%}>
+<td>{{i.name}}</td><td>{{i.value}}</td>
 </tr>
-
 {%endfor%}
-</tbody>
 </table>
 <hr>
 {%endif%}

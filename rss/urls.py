@@ -5,7 +5,8 @@ from rss.feeds import *
 
 urlpatterns = patterns('',
     url(r'^$',views.home,name='news_home'),    
-    url(r'^rss$',notice_feed(),name='news_rss'),
+    url(r'^notices_feed$',notice_feed(),name='news_rss'),
+    url(r'^notification_feed$',notification_feed(),name='notification_rss'),
     url(r'^(?P<docid>\d+)',views.notice_view,name='notice'),
     url(r'^add$',views.add_new,name='notice_add_new'),
     url(r'^approve$',views.approve_notices,name='notices_approve'),
