@@ -46,7 +46,7 @@
 					{{i.title|truncatewords:"20"}}
 					
 					{%if i.recent%}
-					<image width=25 src='{%static "college/images/new-animated.gif"%}' alt='*'></img>
+					<image width=25 src='{%static "college/images/new2.gif"%}' alt='*'></img>
 					{%endif%}
 					{%if i.associated_file%}
 					</a>

@@ -1,0 +1,14 @@
+.category
+{
+text-align:left;
+
+}
+.person
+{
+float:left;
+
+}
+.person img
+{
+
+}

@@ -23,7 +23,8 @@ groupnames=[{'name':'Administration',
 		'permissions':['roombook.add_reservation','rss.add_notice']},
 		{'name':'Faculty',
 		'permissions':[]}]
-users=['staff_adv_1','staff_adv_2','office_window_1','office_window_2','office_inside_1','office_inside_2','notice_admin','registrar_of_soc']
+users=['staff_adv_1','staff_adv_2','office_window_1','office_window_2','office_inside_1','office_inside_2','notice_admin','registrar_of_soc',
+	'principal','bursar','seniortutor','dean(residence)','chaplain','dean(academic_affairs)','public_information_officer']
 papers=[
 	{'code':'MAPT-101','name':'Mathematics first year'},
 	{'code':'PHPT-101','name':'Physics first year'},
@@ -34,8 +35,8 @@ courses=[
 	{'name':'B.Sc. Physics'},
 	{'name':'B.A. Programme'},
 	]
-departments=['Administration','Computer Science','Physics','Sports','English']
-societies=['Computer Science Society','Alumni Cell','Bazam-e-Adab','The Chemistry Society','B.A. Society']
+departments=['Administration','Computer Science','Physics','Sports','English','Principal Office']
+societies=['Computer Science Society','Alumni Cell','Bazam-e-Adab','The Chemistry Society','B.A. Society','SUS','SSL']
 students=['arjoonn sharma','gagan mahajan','karan jhunja','atima shahi']
 
 
@@ -50,7 +51,7 @@ notifications=[
 		]
 news=['Dummy news 1','Dummy news 2','Dummy news 3','Dummy news 4','Dummy news 6','Dummy news 7','Dummy news 8','Dummy news 9',]
 
-
+admin_posts_list=['Principal','Bursar','Dean(Residence)','Dean(Academic Affairs)','Chaplain','Public Information Officer','Special Assignments']
 print '===================================================='
 print 'setting up dummy data'
 print 'starting'
@@ -116,6 +117,9 @@ for i in users:
 		b.staff_adv1=random.choice(college.models.society.objects.all())
 	b.save()
 print 'Users added'
+
+#make administration_posts
+
 
 #make notices
 for i in news:

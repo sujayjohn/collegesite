@@ -1,6 +1,22 @@
 {%extends 'college_template.html'%}
+{%block header%}
+	{%load static%}
+	<link rel="stylesheet" type="text/css" href="{% static "college/css/clg_admin.css"%}"></link>
 
+{%endblock%}
 
 {%block body%}
 
+	{%for category,members in administration_categories.iteritems%}
+		<div class='category'>
+			<h5>{{category}}</h5>
+			{%for person in members%}
+			<div class='person'>
+			<img alt='' src='{{person.userprofile.picture.url}}'></img>
+			{{person.firstname}} {{person.lastname}}
+			</div>
+			
+			{%endfor%}
+		</div>
+	{%endfor%}
 {%endblock%}

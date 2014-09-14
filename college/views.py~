@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
+from django.contrib.auth.models import Group
 import datetime
 import os
 import college.models as college_models
@@ -67,6 +68,17 @@ def alumni(request):
 	return render(request,'college/alumni_home.html',data)
 def clg_admin(request):
 	data={}
+	grps=Group.objects.order_by('id')
+	d={}
+	for i in grps:
+		people=i.user_set.all()
+		x=list(people)
+		print i.name
+		d[str(i.name)]=x
+	print d
+	data['administration_categories']=d
+
+
 	return render(request,'college/clg_admin.html',data)
 def archive(request):
 	data={}

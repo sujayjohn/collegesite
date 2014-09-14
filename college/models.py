@@ -80,6 +80,8 @@ class userprofile(models.Model):
 	def __unicode__(self):
 		return str(self.user.username)
 	user=models.OneToOneField(User)
+	picture=models.ImageField(upload_to='files/userpics',blank=True,null=True,default=None)
+	
 	dept=models.ForeignKey(department,related_name='dept')
 	staff_adv1=models.ForeignKey(society,related_name='staff_adv1',blank=True,null=True)
 	
@@ -105,3 +107,4 @@ class quote(models.Model):
 	def __unicode__(self):
 		return self.value[:20]
 	value=models.CharField(max_length=50)
+
