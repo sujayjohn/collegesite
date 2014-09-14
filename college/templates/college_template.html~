@@ -2,8 +2,9 @@
 <html>
 <head>
 {%load staticfiles%}
-<link async='' rel="shortcut icon" href='{% static "college/images/favicon.ico"%}'> 
-<link rel="stylesheet" type="text/css" href="{% static "college/css/college_template.css"%}">
+<link async='' rel="shortcut icon" href='{% static "college/images/favicon.ico"%}'> </link>
+<link rel="stylesheet" type="text/css" href="{% static "college/css/college_template.css"%}"></link>
+
 {%block header%}
 
 {%endblock%}
@@ -41,7 +42,7 @@
 					<a href='{%url 'department_home'%}'><li>Departments</li></a>
 					<a href='{%url 'archive_home'%}'><li>Archives</li></a>
 					<a href='{%url 'alumni_home'%}'><li>Alumni</li></a>
-					<a href='{%url 'contact_us'%}'><li>Contact </li></a>
+					<a href='{%url 'contact_us'%}'><li>Contact</li></a>
 				</ul>
 			
 			
