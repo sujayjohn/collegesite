@@ -57,7 +57,7 @@ def home(request):
 	notices=notice.objects.filter(pub_date__lte=timezone.now()).filter(pub_date__gte=one_month_back).filter(approved=True).filter(alive=True).order_by('-pub_date','-id')[:5]
 	data['news']=notices
 
-	lists=college_models.custom_notice.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date','-id')[:5]
+	lists=college_models.custom_notice.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 	data['notifications']=lists
 
 	return render(request,'college/home.html',data)
@@ -65,7 +65,9 @@ def home(request):
 def alumni(request):
 	data={}
 	return render(request,'college/alumni_home.html',data)
-
+def clg_admin(request):
+	data={}
+	return render(request,'college/clg_admin.html',data)
 def archive(request):
 	data={}
 	return render(request,'college/archive_home.html',data)

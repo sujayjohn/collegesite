@@ -22,7 +22,7 @@ SECRET_KEY = 'dg8vagq#1s#8bid-(dod)=yjl62!-^!^vehxb31t@*)wl^5%oe'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     #'django.contrib.sitemaps',
     #'gunicorn',
-    
+    #'south',
     
     'docs',
     'college',

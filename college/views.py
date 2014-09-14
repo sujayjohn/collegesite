@@ -65,7 +65,9 @@ def home(request):
 def alumni(request):
 	data={}
 	return render(request,'college/alumni_home.html',data)
-
+def clg_admin(request):
+	data={}
+	return render(request,'college/clg_admin.html',data)
 def archive(request):
 	data={}
 	return render(request,'college/archive_home.html',data)

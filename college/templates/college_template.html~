@@ -36,6 +36,7 @@
 		<div id='navigation'>
 				<ul>
 					<a href='{%url 'college_home'%}'><li>Home</li></a>
+					<a href='{%url 'administration_home'%}'><li>Administration</li></a>
 					<a href='{%url "academics_home"%}'><li>Academics</li></a>
 					<a href='{%url "admissions_home"%}'><li>Admissions</li></a>					
 					<a href='{%url 'society_home'%}'><li>Societies</li></a>
