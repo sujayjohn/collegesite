@@ -72,25 +72,7 @@
 
 	</div>
 	
-<script>
-var top_pic=document.getElementById('top_pic');
-var bottom_pic=document.getElementById('bottom_pic');
-var dock=document.getElementById(DOCK_ID);
 
-top_pic.width=dock.clientWidth;
-top_pic.height=dock.clientHeight;
-top_pic.clientLeft=dock.clientLeft;
-top_pic.clientTop=dock.clientTop;
-
-
-bottom_pic.width=dock.clientWidth;
-bottom_pic.height=dock.clientHeight;
-bottom_pic.clientLeft=dock.clientLeft;
-bottom_pic.clientTop=dock.clientTop;
-
-set_opacity(top_pic,1);
-set_opacity(bottom_pic,1);
-setTimeout('start_show()',DISPLAY_TIME);</script>
 
 
 {%endblock%}
