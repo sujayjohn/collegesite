@@ -6,6 +6,30 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
 <script type="text/javascript" src="{% static "college/home.js" %}" ></script>
 
+<link rel="stylesheet" type="text/css" href="{%static "college/css/jkmegamenu.css"%}" />
+
+<script type="text/javascript" src="{%static 'college/jkmegamenu.js'%}">
+
+/***********************************************
+* jQuery Mega Menu- by JavaScript Kit (www.javascriptkit.com)
+* This notice must stay intact for usage
+* Visit JavaScript Kit at http://www.javascriptkit.com/ for full source code
+***********************************************/
+
+</script>
+
+<script type="text/javascript">
+
+//jkmegamenu.definemenu("anchorid", "menuid", "mouseover|click")
+jkmegamenu.definemenu("megaanchor", "megamenu1", "mouseover")
+
+</script>
+
+
+
+
+
+
 {%endblock%}
 
 {%block body%}
@@ -80,8 +104,18 @@
 			<a href='{%url "events_home"%}'><li>more...</li></a>
 		</ul>
 	</div>
-	<div id='oldsite' class='homedock'>
-	<a href='{%url "events_home"%}'>Where is the old site?</a><hr>
+	<div id='oldsite' class='homedock' class='megamenu'>
+	
+<div class="column">
+	<h3>Web Development</h3>
+	<ul>
+	<li><a href="http://www.javascriptkit.com">JavaScript Kit</a></li>
+	<li><a href="http://www.dynamicdrive.com/">Dynamic Drive</a></li>
+	<li><a href="http://www.cssdrive.com">CSS Drive</a></li>
+	<li><a href="http://www.codingforums.com">Coding Forums</a></li>
+	<li><a href="http://www.javascriptkit.com/domref/">DOM Reference</a></li>
+	</ul>
+</div>
 
 	</div>
 	
