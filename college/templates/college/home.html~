@@ -6,25 +6,51 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
 <script type="text/javascript" src="{% static "college/home.js" %}" ></script>
 
-<link rel="stylesheet" type="text/css" href="{%static "college/css/jkmegamenu.css"%}" />
 
-<script type="text/javascript" src="{%static 'college/jkmegamenu.js'%}">
 
-/***********************************************
-* jQuery Mega Menu- by JavaScript Kit (www.javascriptkit.com)
-* This notice must stay intact for usage
-* Visit JavaScript Kit at http://www.javascriptkit.com/ for full source code
-***********************************************/
 
+
+<script type="text/javascript" >
+$(document).ready(function()
+{
+
+$(".account").click(function()
+{
+var X=$(this).attr('id');
+if(X==1)
+{
+$(".submenu").hide();
+$(this).attr('id', '0');
+}
+else
+{
+$(".submenu").show();
+$(this).attr('id', '1');
+}
+
+});
+
+//Mouse click on sub menu
+$(".submenu").mouseup(function()
+{
+return false
+});
+
+//Mouse click on my account link
+$(".account").mouseup(function()
+{
+return false
+});
+
+
+//Document Click
+$(document).mouseup(function()
+{
+$(".submenu").hide();
+$(".account").attr('id', '');
+});
+});
 </script>
-
-<script type="text/javascript">
-
-//jkmegamenu.definemenu("anchorid", "menuid", "mouseover|click")
-jkmegamenu.definemenu("megaanchor", "megamenu1", "mouseover")
-
-</script>
-
 
 
 
@@ -68,7 +94,7 @@ jkmegamenu.definemenu("megaanchor", "megamenu1", "mouseover")
 		</ul>
 	</div>
 	
-	<div id='permanent_links' class='homedock'>
+	<div id='permanent_links' class='homedock' class='dropdown'>
 	<a href='{%url "notification_view"%}'>NOTIFICATIONS</a>
 	<div id='icons'>
 				<a href='{%url 'notification_rss'%}'>
@@ -104,18 +130,8 @@ jkmegamenu.definemenu("megaanchor", "megamenu1", "mouseover")
 			<a href='{%url "events_home"%}'><li>more...</li></a>
 		</ul>
 	</div>
-	<div id='oldsite' class='homedock' class='megamenu'>
-	
-<div class="column">
-	<h3>Web Development</h3>
-	<ul>
-	<li><a href="http://www.javascriptkit.com">JavaScript Kit</a></li>
-	<li><a href="http://www.dynamicdrive.com/">Dynamic Drive</a></li>
-	<li><a href="http://www.cssdrive.com">CSS Drive</a></li>
-	<li><a href="http://www.codingforums.com">Coding Forums</a></li>
-	<li><a href="http://www.javascriptkit.com/domref/">DOM Reference</a></li>
-	</ul>
-</div>
+	<div id='oldsite' class='homedock'>
+	<a href='{%url "events_home"%}'>Where is the old site?</a><hr>
 
 	</div>
 	
