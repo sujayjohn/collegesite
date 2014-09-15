@@ -101,7 +101,7 @@ color:white;
 float:left;
 border-radius:5px;
 margin-left:0.5%;
-margin-right:0.1%;
+margin-right:1%;
 margin-bottom:0%;
 }
 #navigation a:hover
@@ -118,6 +118,7 @@ float:right;
 {
 float:right;
 text-align:right;
+margin-right:1%;
 }
 #header_logo,#arjoonn
 {margin:0%;vertical-align:center;float:left;}
