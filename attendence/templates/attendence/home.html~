@@ -4,18 +4,23 @@
 {%block header%}
 	{%load static%}
 	<link rel="stylesheet" type="text/css" href="{% static "attendence/home.css"%}"></link>
+	
+	<script type='text/javascript' src="{%static 'college/jquery.min.js'%}"></script>
+	<script type='text/javascript' src="{%static 'attendence/home.js'%}"></script>
 {%endblock%}
 
 
 {%block body%}
+
+<input type='hidden' value='{{url}}' id='attendence_url'></input>
 <div>
-	<select>
+	<select id='course'>
 		{%for course in courses%}
 			<option value={{course.id}}>{{course.name}}</option>
 		{%endfor%}
 		
 	</select>
-	<select>
+	<select id='semester'>
 		<option value=1>1</option>
 		<option value=2>2</option>
 		<option value=3>3</option>
@@ -24,12 +29,15 @@
 		<option value=1>6</option>
 		
 	</select>
-	<button>Get Attendence</button>
+	<button id='get_attendence'>Get Attendence</button>
+	{{error}}
 </div>
 {%if class_attendence%}
 	<hr>
 	<div>
-	
+	{%for s in class_attendence%}
+		{{s}} {{s.month1.lecture}} {{s.month1.tutorial}} {{s.month1.practical}}<br>
+	{%endfor%}
 	</div>
 {%endif%}
 {%endblock%}

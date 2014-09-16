@@ -26,6 +26,16 @@ users=['staff_adv_1','staff_adv_2','office_window_1','office_window_2','office_i
 papers=[
 	{'code':'MAPT-101','name':'Mathematics first year'},
 	{'code':'PHPT-101','name':'Physics first year'},
+	{'code':'MAPT-201','name':'Mathematics 2 year'},
+	{'code':'MAPT-301','name':'Mathematics f223irst year'},
+	{'code':'MAPT-401','name':'Mathematics firs223t year'},
+	{'code':'MAPT-501','name':'Mas first y456ear'},
+	{'code':'MAPT-102','name':'Mathematics first year'},
+	{'code':'PHPT-103','name':'Physics first year'},
+	{'code':'MAPT-204','name':'Mathematics 2 year'},
+	{'code':'MAPT-305','name':'Maths f223irst year'},
+	{'code':'MAPT-406','name':'Maics firs223t year'},
+	{'code':'MAPT-507','name':'Macs first y456ear'},
 	]
 course_types=['UnderGraduate','PostGraduate','Vocational']
 courses=[
@@ -73,13 +83,7 @@ for i in groupnames:
 	g1.name=i
 	g1.save()
 print 'Groups Added'
-#add papers
-for i in papers:
-	a=college.models.paper()
-	a.code=i['code']
-	a.name=i['name']
-	a.save()
-print 'Papers Added'
+
 #add course types
 for i in course_types:
 	a=college.models.course_type()
@@ -93,6 +97,16 @@ for i in courses:
 	a.type_of_course=random.choice(college.models.course_type.objects.all())
 	a.save()
 print 'Courses added'
+#add papers
+for i in papers:
+	a=college.models.paper()
+	a.code=i['code']
+	a.name=i['name']
+	a.semester=random.choice([1,2,3,4,5,6])
+	a.course=random.choice(college.models.course.objects.all())
+	a.save()
+print 'Papers Added'
+
 #departments
 for i in departments:
 	a=college.models.department()
@@ -183,6 +197,15 @@ for i in range(10):
 	a.save()
 print 'Docs added'
 
+
+for i in rooms:
+	a=roombook.models.room()
+	a.name=i
+	a.ac_available=random.choice([True,False])
+	a.projector_available=random.choice([True,False])
+	a.save()
+print 'rooms added'
+
 #add a few reservations
 for i in range(20):
 	a=roombook.models.reservation()
@@ -194,14 +217,38 @@ for i in range(20):
 	a.time_to=datetime.datetime(now.date().year,now.date().month,now.date().day,now.time().hour+random.choice((1,2,3)),now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
 	a.approved=True;
 	a.save()
+print 'reservations added'
 
-for i in rooms:
-	a=roombook.models.room()
-	a.name=i
-	a.ac_available=random.choice([True,False])
-	a.projector_available=random.choice([True,False])
-	a.save()
-print 'rooms added'
+#add dummy attendence for student 1
+mth_t=attendence.models.month_total()
+mth_t.lecture=40
+mth_t.tutorial=30
+mth_t.practical=21
+mth_t.save()
+
+mth_r=attendence.models.month_record()
+mth_r.lecture=40
+mth_r.tutorial=25
+mth_r.practical=2
+mth_r.save()
+
+
+s=college.models.student.objects.first()
+paper_attend=attendence.models.paper_attend()
+
+paper_attend.paper=college.models.paper.objects.filter(course=s.course).order_by('id')[0]
+
+paper_attend.save()
+
+st_at=attendence.models.student_attend()
+st_at.student=s
+st_at.paper_attend=paper_attend
+st_at.save()
+
+print 'Attendence added'
+
+
+print '===================================================='
 print 'Please set user group permissions'
 print 'Please assign users to groups'
 

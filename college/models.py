@@ -32,11 +32,6 @@ class client_data(models.Model):
 	
 
 
-class paper(models.Model):
-	def __unicode__(self):
-		return str(self.code)+str(self.name[:10])
-	code=models.CharField(max_length=10)
-	name=models.CharField(max_length=25)
 
 class course_type(models.Model):
 	def __unicode__(self):
@@ -49,22 +44,15 @@ class course(models.Model):
 		return str(self.name)
 	name=models.CharField(max_length=30)
 	type_of_course=models.ForeignKey(course_type)
-	
-	paper1=models.ForeignKey(paper,related_name='paper1',blank=True,null=True)
-	paper2=models.ForeignKey(paper,related_name='paper2',blank=True,null=True)
-	paper3=models.ForeignKey(paper,related_name='paper3',blank=True,null=True)
-	paper4=models.ForeignKey(paper,related_name='paper4',blank=True,null=True)
-	paper5=models.ForeignKey(paper,related_name='paper5',blank=True,null=True)
-	paper6=models.ForeignKey(paper,related_name='paper6',blank=True,null=True)
-	paper7=models.ForeignKey(paper,related_name='paper7',blank=True,null=True)
-	paper8=models.ForeignKey(paper,related_name='paper8',blank=True,null=True)
-	paper9=models.ForeignKey(paper,related_name='paper9',blank=True,null=True)
-	paper10=models.ForeignKey(paper,related_name='paper10',blank=True,null=True)
-	paper11=models.ForeignKey(paper,related_name='paper11',blank=True,null=True)
-	paper12=models.ForeignKey(paper,related_name='paper12',blank=True,null=True)
-	paper13=models.ForeignKey(paper,related_name='paper13',blank=True,null=True)
-	paper14=models.ForeignKey(paper,related_name='paper14',blank=True,null=True)
-	
+
+class paper(models.Model):
+	def __unicode__(self):
+		return self.code
+	code=models.CharField(max_length=10)
+	name=models.CharField(max_length=25)
+	course=models.ForeignKey(course)
+	semester=models.IntegerField(default=0)	
+
 class department(models.Model):
 	def __unicode__(self):
 		return str(self.name)
