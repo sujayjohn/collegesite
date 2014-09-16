@@ -1,15 +1,17 @@
 .category
 {
-text-align:left;
-
+text-align:center;
 }
+.category hr
+{width:70%;}
 .person
 {
-float:left;
-
+margin:5px;
+text-align:center;
 }
 .person img
 {
-width:100px;
-height:100px;
+width:200px;
+height:auto;
+clear:both;
 }

@@ -72,12 +72,11 @@ def alumni(request):
 def clg_admin(request):
 	data={}
 	grps=Group.objects.order_by('id')
-	d={}
+	d=[]
 	for i in grps:
 		people=i.user_set.all()
 		x=list(people)
-		print i.name
-		d[str(i.name)]=x
+		d.append({'name':i.name,'members':x})
 	data['administration_categories']=d
 	return render(request,'college/clg_admin.html',data)
 	

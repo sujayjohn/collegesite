@@ -17,7 +17,7 @@ from django.core.management import execute_from_command_line
 execute_from_command_line(['manage.py','syncdb'])
 
 
-groupnames=['Administration','Staff Advisor','Faculty','Principal','Bursar','Dean(Residence)','Dean(Academic Affairs)','Chaplain','Public Information Officer','Special Assignments']
+groupnames=['Principal','Bursar','Dean(Residence)','Dean(Academic Affairs)','Chaplain','Public Information Officer','Special Assignments','Administration','Staff Advisor','Faculty']
 users=['staff_adv_1','staff_adv_2','office_window_1','office_window_2','office_inside_1','office_inside_2','notice_admin','registrar_of_soc',
 	'principal','bursar','seniortutor','dean(residence)','chaplain','dean(academic_affairs)','public_information_officer']
 papers=[

@@ -7,16 +7,25 @@
 
 {%block body%}
 
-	{%for category,members in administration_categories.iteritems%}
+	{%for category in administration_categories%}
 		<div class='category'>
-			<h5>{{category}}</h5>
-			{%for person in members%}
+			<h5>{{category.name}}</h5>
+			{%for person in category.members%}
 			<div class='person'>
-			<img alt='' src='{{person.userprofile.picture.url}}'></img>
-			{{person.firstname}} {{person.lastname}}
+				{%if person.userprofile.picture%}
+					<img alt='' src='{{person.userprofile.picture.url}}'></img>
+					<br>
+				{%endif%}
+				{%if person.firstname%}
+					{{person.firstname}} {{person.lastname}}
+				{%else%}
+					{{person.username}}
+				{%endif%}
 			</div>
-			
+
 			{%endfor%}
+		<hr>
 		</div>
+		
 	{%endfor%}
 {%endblock%}
