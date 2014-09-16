@@ -2,6 +2,7 @@
 import os
 import sys
 import random
+import datetime
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stephens.settings")
 
@@ -10,14 +11,16 @@ import college
 import rss
 import docs
 import roombook
+import attendence
 
 from django.contrib.auth.models import User,Group
 from django.core.management import execute_from_command_line
+from django.utils import timezone
 
 execute_from_command_line(['manage.py','syncdb'])
 
 
-groupnames=['Administration','Staff Advisor','Faculty','Principal','Bursar','Dean(Residence)','Dean(Academic Affairs)','Chaplain','Public Information Officer','Special Assignments']
+groupnames=['Principal','Bursar','Dean(Residence)','Dean(Academic Affairs)','Chaplain','Public Information Officer','Special Assignments','Administration','Staff Advisor','Faculty']
 users=['staff_adv_1','staff_adv_2','office_window_1','office_window_2','office_inside_1','office_inside_2','notice_admin','registrar_of_soc',
 	'principal','bursar','seniortutor','dean(residence)','chaplain','dean(academic_affairs)','public_information_officer']
 papers=[
@@ -140,6 +143,8 @@ for i in students:
 	a.course=random.choice(college.models.course.objects.all())
 	a.save()
 print 'Students added'
+
+
 #add a contact
 a=college.models.contact()
 a.name='Phone'
@@ -166,6 +171,30 @@ for i in doctypes:
 	a.stage4=random.choice(college.models.userprofile.objects.all())
 	a.save()
 print 'Doc types Added'
+
+#add dummy docs
+for i in range(10):
+	a=docs.models.doc()
+	a.student=random.choice(college.models.student.objects.all())
+	a.doctype=random.choice(docs.models.doc_type.objects.all())
+	x=a.doctype.stages()
+	a.stage_count=x.index(random.choice(x))
+	a.location=college.models.userprofile.objects.get(pk=int(x[a.stage_count]))
+	a.save()
+print 'Docs added'
+
+#add a few reservations
+for i in range(20):
+	a=roombook.models.reservation()
+	a.booked_by=random.choice(college.models.userprofile.objects.all())
+	a.room_booked=random.choice(roombook.models.room.objects.all())
+	now=timezone.now()
+	a.time_from=datetime.datetime(now.date().year,now.date().month,random.choice(range(1,21)),now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
+	now=a.time_from
+	a.time_to=datetime.datetime(now.date().year,now.date().month,now.date().day,now.time().hour+random.choice((1,2,3)),now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
+	a.approved=True;
+	a.save()
+
 for i in rooms:
 	a=roombook.models.room()
 	a.name=i

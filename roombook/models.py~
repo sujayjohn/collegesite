@@ -25,7 +25,7 @@ class reservation(models.Model):
 		return self.room_booked.name
 		
 	booked_by=models.ForeignKey(userprofile)
-	room_booked=models.ForeignKey(room,related_name='room_booked')
+	room_booked=models.ForeignKey(room)
 	time_from=models.DateTimeField(default=timezone.now())
 	time_to=models.DateTimeField(default=timezone.now())
 	approved=models.BooleanField(default=False)

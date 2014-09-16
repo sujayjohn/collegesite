@@ -94,6 +94,10 @@ class student(models.Model):
 	def __unicode__(self):
 		return str(self.name)
 	name=models.CharField(max_length=40)
+	picture=models.ImageField(upload_to='files/studentpics',blank=True,null=True,default=None)
+	email=models.EmailField(null=True,blank=True,default=None)
+	
+	
 	course=models.ForeignKey(course,related_name='course')
 	admission_date=models.DateField(default=timezone.now())
 	

@@ -1,0 +1,35 @@
+{%extends 'college_template.html'%}
+
+
+{%block header%}
+	{%load static%}
+	<link rel="stylesheet" type="text/css" href="{% static "attendence/home.css"%}"></link>
+{%endblock%}
+
+
+{%block body%}
+<div>
+	<select>
+		{%for course in courses%}
+			<option value={{course.id}}>{{course.name}}</option>
+		{%endfor%}
+		
+	</select>
+	<select>
+		<option value=1>1</option>
+		<option value=2>2</option>
+		<option value=3>3</option>
+		<option value=1>4</option>
+		<option value=1>5</option>
+		<option value=1>6</option>
+		
+	</select>
+	<button>Get Attendence</button>
+</div>
+{%if class_attendence%}
+	<hr>
+	<div>
+	
+	</div>
+{%endif%}
+{%endblock%}

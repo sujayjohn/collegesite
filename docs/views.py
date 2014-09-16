@@ -94,7 +94,7 @@ def edit(request):
 		avl=[i.id for i in available]
 		for i in data.keys():
 			if int(i) in avl:
-				doc.objects.get(id=int(i)).move()
+				doc.objects.get(pk=int(i)).move()
 		#-------------------------------------------
 		data={'result':True}
 		data=json.dumps(data)

@@ -44,7 +44,7 @@ INSTALLED_APPS = (
     'college',
     'rss',
     'roombook',
-    #'attendence',
+    'attendence',
     
 )
 

@@ -22,25 +22,25 @@ class doc_type(models.Model):
 	def stages(self):
 		st=[]
 		if self.stage1!=None:
-			st.append(self.stage1.id)
+			st.append(self.stage1)
 		if self.stage2!=None:
-			st.append(self.stage2.id)
+			st.append(self.stage2)
 		if self.stage3!=None:
-			st.append(self.stage3.id)
+			st.append(self.stage3)
 		if self.stage4!=None:
-			st.append(self.stage4.id)
+			st.append(self.stage4)
 		if self.stage5!=None:
-			st.append(self.stage5.id)
+			st.append(self.stage5)
 		if self.stage6!=None:
-			st.append(self.stage6.id)
+			st.append(self.stage6)
 		if self.stage7!=None:
-			st.append(self.stage7.id)
+			st.append(self.stage7)
 		if self.stage8!=None:
-			st.append(self.stage8.id)
+			st.append(self.stage8)
 		if self.stage9!=None:
-			st.append(self.stage9.id)
+			st.append(self.stage9)
 		if self.stage10!=None:
-			st.append(self.stage10.id)
+			st.append(self.stage10)
 		return st
 
 class doctype_form(ModelForm):
@@ -58,7 +58,7 @@ class doc(models.Model):
 	
 	recieved_date_time=models.DateTimeField(default=timezone.now())
 	completed_date_time=models.DateTimeField(blank=True,null=True)
-	last_accessed=models.DateTimeField(default=timezone.now())
+	last_accessed=models.DateTimeField(auto_now=True)
 	pickup_date_time=models.DateTimeField(blank=True,null=True)
 
 	notes=models.CharField(max_length=150,blank=True)
@@ -81,7 +81,6 @@ class doc(models.Model):
 			data['Action']='Document has been picked up'
 			data['Pickup Date']=str(self.pickup_date_time.year)+'/'+str(self.pickup_date_time.month)+'/'+str(self.pickup_date_time.day)+'        '+str(self.pickup_date_time.hour)+':'+str(self.pickup_date_time.minute)+'  HRS'
 			data.pop('Last Accessed')
-		data['Type']=self.doctype.name
 		return data
 	def addnote(self,new_note):
 		self.notes+=' | '+new_note
@@ -95,13 +94,11 @@ class doc(models.Model):
 		
 		if current_pos==(len(stages)-1):
 			self.pickup_date_time=timezone.now()
-			self.last_accessed=timezone.now()
 			
 		if next_pos in xrange(len(stages)):
 			if next_pos==(len(stages)-1):
 				self.completed_date_time=timezone.now()
-			self.last_accessed=timezone.now()
-			self.location=userprofile.objects.get(id=stages[next_pos])
+			self.location=stages[next_pos])
 			self.stage_count+=1
 		self.save()
 class doc_form(ModelForm):
