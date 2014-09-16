@@ -75,7 +75,8 @@ def clg_admin(request):
 	d=[]
 	for i in grps:
 		people=i.user_set.all()
-		x=list(people)
+		
+		x=[i for i in people if i.is_active()]
 		d.append({'name':i.name,'members':x})
 	data['administration_categories']=d
 	return render(request,'college/clg_admin.html',data)

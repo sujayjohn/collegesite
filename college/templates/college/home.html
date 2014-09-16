@@ -17,7 +17,7 @@
 </div>
 {%endif%}
 <hr>
-	<div id='applications' class='homedock'>
+	<div class='homedock'>
 	APPLICATIONS<hr>
 		<ul>
 			<a href='{%url 'docs_home'%}' ><li>Office</li></a>
@@ -27,7 +27,7 @@
 			<a href='http://library.ststephens.edu/'><li>e-Library</li></a>
 		</ul>
 	</div>
-	<div id='news' class='homedock'>
+	<div class='homedock'>
 	<a href='{%url 'news_home'%}'>NEWS FEED</a>
 		<div id='icons'>
 				<a href='{%url 'news_rss'%}'>
@@ -44,7 +44,7 @@
 		</ul>
 	</div>
 	
-	<div id='permanent_links' class='homedock'>
+	<div class='homedock'>
 	<a href='{%url "notification_view"%}'>NOTIFICATIONS</a>
 	<div id='icons'>
 				<a href='{%url 'notification_rss'%}'>
@@ -70,7 +70,7 @@
 
 		</ul>
 	</div>
-	<div id='events' class='homedock'>
+	<div class='homedock'>
 	<a href='{%url "events_home"%}'>EVENTS</a><hr>
 		<ul>
 			{%for i in events%}
@@ -80,8 +80,8 @@
 			<a href='{%url "events_home"%}'><li>more...</li></a>
 		</ul>
 	</div>
-	<div id='oldsite' class='homedock'>
-	<a href='{%url "events_home"%}'>Where is the old site?</a><hr>
+	<div class='homedock'>
+	<a href='{%url "principal_home"%}'>Principal's Desk</a><hr>
 
 	</div>
 	

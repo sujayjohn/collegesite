@@ -4,7 +4,7 @@
 {%load staticfiles%}
 <link async='' rel="shortcut icon" href='{% static "college/images/favicon.ico"%}'> </link>
 <link rel="stylesheet" type="text/css" href="{% static "college/css/college_template.css"%}"></link>
-
+<title>St. Stephen's College</title>
 {%block header%}
 
 {%endblock%}
@@ -21,13 +21,10 @@
 			<div id='arjoonn'>ST. STEPHEN'S COLLEGE<hr></hr><div class='subtext'>University Enclave,Delhi-110007</div></div>			
 			</a>	
 			</div>
-			<div id='icons'>
-				<a href='{%url 'news_rss'%}'>
-				<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
-				</a>
-				
-			</div>
 			
+		</div>
+		<div style='float:right;margin:0.2%;color:lightblue;' class='subtext'>
+		<a href=''>Old website</a>
 		</div>
 	</div>
 	<hr>

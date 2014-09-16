@@ -6,56 +6,6 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
 <script type="text/javascript" src="{% static "college/home.js" %}" ></script>
 
-
-
-
-
-<script type="text/javascript" >
-$(document).ready(function()
-{
-
-$(".account").click(function()
-{
-var X=$(this).attr('id');
-if(X==1)
-{
-$(".submenu").hide();
-$(this).attr('id', '0');
-}
-else
-{
-$(".submenu").show();
-$(this).attr('id', '1');
-}
-
-});
-
-//Mouse click on sub menu
-$(".submenu").mouseup(function()
-{
-return false
-});
-
-//Mouse click on my account link
-$(".account").mouseup(function()
-{
-return false
-});
-
-
-//Document Click
-$(document).mouseup(function()
-{
-$(".submenu").hide();
-$(".account").attr('id', '');
-});
-});
-</script>
-
-
-
-
-
 {%endblock%}
 
 {%block body%}
@@ -67,7 +17,7 @@ $(".account").attr('id', '');
 </div>
 {%endif%}
 <hr>
-	<div id='applications' class='homedock'>
+	<div class='homedock'>
 	APPLICATIONS<hr>
 		<ul>
 			<a href='{%url 'docs_home'%}' ><li>Office</li></a>
@@ -77,7 +27,7 @@ $(".account").attr('id', '');
 			<a href='http://library.ststephens.edu/'><li>e-Library</li></a>
 		</ul>
 	</div>
-	<div id='news' class='homedock'>
+	<div class='homedock'>
 	<a href='{%url 'news_home'%}'>NEWS FEED</a>
 		<div id='icons'>
 				<a href='{%url 'news_rss'%}'>
@@ -94,7 +44,7 @@ $(".account").attr('id', '');
 		</ul>
 	</div>
 	
-	<div id='permanent_links' class='homedock' class='dropdown'>
+	<div class='homedock'>
 	<a href='{%url "notification_view"%}'>NOTIFICATIONS</a>
 	<div id='icons'>
 				<a href='{%url 'notification_rss'%}'>
@@ -120,7 +70,7 @@ $(".account").attr('id', '');
 
 		</ul>
 	</div>
-	<div id='events' class='homedock'>
+	<div class='homedock'>
 	<a href='{%url "events_home"%}'>EVENTS</a><hr>
 		<ul>
 			{%for i in events%}
@@ -130,8 +80,8 @@ $(".account").attr('id', '');
 			<a href='{%url "events_home"%}'><li>more...</li></a>
 		</ul>
 	</div>
-	<div id='oldsite' class='homedock'>
-	<a href='{%url "events_home"%}'>Where is the old site?</a><hr>
+	<div class='homedock'>
+	<a href='{%url "principal_home"%}'>Principal's Desk</a><hr>
 
 	</div>
 	

@@ -8,7 +8,7 @@
 {%block body%}
 
 	{%for category in administration_categories%}
-		<div class='category'>
+		<div class='category' id={{category.name|lower}}>
 			<h5>{{category.name}}</h5>
 			{%for person in category.members%}
 			<div class='person'>
@@ -16,6 +16,8 @@
 					<img alt='' src='{{person.userprofile.picture.url}}'></img>
 					<br>
 				{%endif%}
+				
+				{{person.userprofile.title|default:"M."}}
 				{%if person.firstname%}
 					{{person.firstname}} {{person.lastname}}
 				{%else%}

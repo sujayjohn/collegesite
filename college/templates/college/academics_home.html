@@ -1,33 +1,38 @@
 {%extends 'college_template.html'%}
-
+{%block header%}
+	{%load static%}
+	<link rel='stylesheet' type='text/css' href='{%static "college/css/academics_home.css"%}'></link>
+{%endblock%}
 
 {%block body%}
-<div>
-	<pre>
-The College strives to maintain its cosmopolitan and pluralistic tradition by 
-enrolling young scholars from diverse  communities and different social and 
-economical backgrounds. This rich diversity is the bedrock of the College's 
-special ambience and culture. Students of St. Stephen's College are referred 
-to as Junior Members and the Lecturers are referred to as Senior Members. 
-Although the Junior Members belong to different courses, societies & activities, 
-they identify themselves as Stephanians because it attempts to comprehend all 
-that is of value within the College.
-
-Various courses in the Arts and Sciences  are offered by the College in accordance 
-with the syllabi and prescriptions of the University of Delhi. Every Student is 
-required to work towards a degree with a specific choice of subjects. The duration 
-of M.A. / M.Sc. programmes (Graduate) is two years, and that 
-of B.A. Hons/B.Sc. Hons and B.A Programme / B.Sc. programmes (Undergraduate) is three years.
-	</pre>
+<div class='message'>
+	<p>
+		The College strives to maintain its cosmopolitan and pluralistic tradition by 
+		enrolling young scholars from diverse  communities and different social and 
+		economical backgrounds. This rich diversity is the bedrock of the College's 
+		special ambience and culture. Students of St. Stephen's College are referred 
+		to as Junior Members and the Lecturers are referred to as Senior Members. 
+		Although the Junior Members belong to different courses, societies & activities, 
+		they identify themselves as Stephanians because it attempts to comprehend all 
+		that is of value within the College.
+	</p>
+	<p>
+		Various courses in the Arts and Sciences  are offered by the College in accordance 
+		with the syllabi and prescriptions of the University of Delhi. Every Student is 
+		required to work towards a degree with a specific choice of subjects. The duration 
+		of M.A. / M.Sc. programmes (Graduate) is two years, and that 
+		of B.A. Hons/B.Sc. Hons and B.A Programme / B.Sc. programmes (Undergraduate) is three years.
+	</p>
+	<hr>
 </div>
 
-<hr>
+
 <div>
-<ul>
-<li>Courses offered</li>
-<li>Faculty</li>
-<li><a href='{%url "department_home"%}'>Departments</a></li>
-<li>Prizes, Scholarships and Awards</li>
-</ul>
+	<ul>
+		<li>Courses offered</li>
+		<li><a href='{%url "clg_admin"%}#faculty'>Faculty</a></li>
+		<li><a href='{%url "department_home"%}'>Departments</a></li>
+		<li>Prizes, Scholarships and Awards</li>
+	</ul>
 </div>
 {%endblock%}

@@ -80,6 +80,7 @@ class userprofile(models.Model):
 	def __unicode__(self):
 		return str(self.user.username)
 	user=models.OneToOneField(User)
+	title=models.CharField(max_length=15,blank=True,null=True,default=None)
 	picture=models.ImageField(upload_to='files/userpics',blank=True,null=True,default=None)
 	
 	dept=models.ForeignKey(department,related_name='dept')

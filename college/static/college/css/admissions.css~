@@ -3,7 +3,7 @@
 height:auto;
 text-align:left;
 }
-#admission_info p
+#admission_info div
 {
 background-color:#D1DBBD;
 }
