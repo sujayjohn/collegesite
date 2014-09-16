@@ -64,7 +64,7 @@ for i in notifications:
 	a.title=i
 	a.description=''
 	alphabet='qwertyui  opasdfg   hjklzxcvbnm      '
-	for i in xrange(int(random.random()*800)):
+	for i in xrange(int(random.random()*799)):
 		a.description+=random.choice(alphabet)
 	a.save()
 print 'Notifications added'
@@ -129,7 +129,7 @@ for i in news:
 	a.title=i
 	a.description=''
 	alphabet='qwertyui  opasdfg   hjklzxcvbnm      '
-	for i in xrange(int(random.random()*1000)):
+	for i in xrange(int(random.random()*799)):
 		a.description+=random.choice(alphabet)
 	x=college.models.userprofile.objects.all()
 	a.author=random.choice(x)
