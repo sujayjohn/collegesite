@@ -51,7 +51,10 @@ def home(request):
 	
 	path=os.path.join(here,'college','static','college','images','homepage')
 	data['picture_gallery']=os.listdir(path)
-	data['quote_of_the_day']=random.choice(college_models.quote.objects.all())
+	try:
+		data['quote_of_the_day']=random.choice(college_models.quote.objects.all())
+	except Exception as e:
+		print e
 	
 	now=timezone.now()
 	one_month_back=datetime.datetime(now.date().year,now.date().month-1,now.date().day,now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
@@ -75,10 +78,7 @@ def clg_admin(request):
 		x=list(people)
 		print i.name
 		d[str(i.name)]=x
-	print d
 	data['administration_categories']=d
-
-
 	return render(request,'college/clg_admin.html',data)
 	
 def notification_view(request,docid=None):	

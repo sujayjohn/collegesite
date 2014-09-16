@@ -17,12 +17,7 @@ from django.core.management import execute_from_command_line
 execute_from_command_line(['manage.py','syncdb'])
 
 
-groupnames=[{'name':'Administration',
-		'permissions':['docs.change_doc','docs.add_doc']}
-		,{'name':'Staff Advisor',
-		'permissions':['roombook.add_reservation','rss.add_notice']},
-		{'name':'Faculty',
-		'permissions':[]}]
+groupnames=['Administration','Staff Advisor','Faculty','Principal','Bursar','Dean(Residence)','Dean(Academic Affairs)','Chaplain','Public Information Officer','Special Assignments']
 users=['staff_adv_1','staff_adv_2','office_window_1','office_window_2','office_inside_1','office_inside_2','notice_admin','registrar_of_soc',
 	'principal','bursar','seniortutor','dean(residence)','chaplain','dean(academic_affairs)','public_information_officer']
 papers=[
@@ -51,7 +46,6 @@ notifications=[
 		]
 news=['Dummy news 1','Dummy news 2','Dummy news 3','Dummy news 4','Dummy news 6','Dummy news 7','Dummy news 8','Dummy news 9',]
 
-admin_posts_list=['Principal','Bursar','Dean(Residence)','Dean(Academic Affairs)','Chaplain','Public Information Officer','Special Assignments']
 print '===================================================='
 print 'setting up dummy data'
 print 'starting'
@@ -73,7 +67,7 @@ print 'Notifications added'
 #make groups
 for i in groupnames:
 	g1=Group()
-	g1.name=i['name']
+	g1.name=i
 	g1.save()
 print 'Groups Added'
 #add papers
