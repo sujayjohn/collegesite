@@ -1,0 +1,41 @@
+#tabs {
+	font-size: 90%;
+}
+#tabs li {
+	list-style: none;
+}
+#tabs li:hover
+{
+list-style:none;
+background:grey;
+}
+* html #tabs li {
+	display: inline;
+}
+#tabs li, #tabs li a {
+	float: left;
+}
+#tabs ul li.active {
+	border:2px white solid;
+	border-radius:5px;
+}
+
+#tabs div {
+	background: #FFFFCC;
+	clear: both;
+	padding: 15px;
+	min-height: 200px;
+}
+
+#tabs ul li a {
+	text-decoration: none;
+	color:black;
+	font-weight: bold;
+}
+.thumbs {
+	float:left;
+	border:#000 solid 1px;
+
+
+}
+

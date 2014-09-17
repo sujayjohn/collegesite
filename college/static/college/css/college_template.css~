@@ -118,6 +118,7 @@ float:right;
 {
 float:right;
 text-align:right;
+margin-right:1%;
 }
 #header_logo,#arjoonn
 {margin:0%;vertical-align:center;float:left;}

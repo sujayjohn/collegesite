@@ -1,14 +1,42 @@
 {%extends 'college_template.html'%}
+
+{%block header%}
+	{%load static%}
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
+	<script type="text/javascript" src="{% static "college/home.js" %}" ></script>
+	<script type="text/javascript" src="{% static "college/archives.js" %}" ></script>
+	<link rel="stylesheet" type="text/css" href='{% static "/static/college/css/archive.css"%}'>
+{%endblock%}
+
+
 {%block body%}
-<div id='archive_types'>
+
+
+<div id='tabs'>
 
 	<ul>
-		<li>About the College</li>
-		<li>History</li>
-		<li>Campus map</li>
-		<li>Articles</li>
-		<li>Photo/Video Gallery</li>
-		<li>Publications</li>
+		<li><a href='#about_college'>About the College</a></li>
+		<li><a href='#history'>History</a></li>
+		<li><a href='#articles'>Articles</a></li>
+		<li><a href='#gallery'>Photo/Video Gallery</a></li>
+		<li><a href='#publications'>Publications</a></li>
 	</ul>
+	<div id='about_college'>
+	lorem_ipsum1
+	</div>
+	<div id='history'>
+	lorem_ipsum2
+	</div>
+	<div id='articles'>
+	lorem_ipsum3
+	</div>
+	<div id='gallery'>
+	lorem_ipsum4
+	</div>
+	<div id='publications'>
+	lorem_ipsum5
+	</div>
+	
+	
 </div>
 {%endblock%}
