@@ -21,11 +21,11 @@
 	APPLICATIONS<hr>
 		<ul>
 			<a href='{%url 'docs_home'%}' ><li>Office</li></a>
-			<a href='http://sscattendance.formistry.com/report/'><li>Attendence</li></a>
-			<a href='{%url "attend_home"%}'><li>Attendence SSC</li></a>
+			<a href='{%url "attend_home"%}'><li>Attendence</li></a>
 			<a href='{%url 'roombook_home'%}'><li>Room Booking</li></a>
 			<a href='{%url 'news_home'%}'><li>Notice Board</li></a>
 			<a href='http://library.ststephens.edu/'><li>e-Library</li></a>
+			<a href='http://library.ststephens.edu/'><li>Forms</li></a>
 		</ul>
 	</div>
 	<div class='homedock'>
@@ -83,7 +83,6 @@
 	</div>
 	<div class='homedock'>
 	<a href='{%url "principal_home"%}'>Principal's Desk</a><hr>
-
 	</div>
 	
 
