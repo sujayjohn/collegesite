@@ -34,10 +34,14 @@
 </div>
 {%if class_attendence%}
 	<hr>
-	<div>
+	<div id='class_attendence'>
+	<table>
 	{%for s in class_attendence%}
-		{{s}} {{s.month1.lecture}} {{s.month1.tutorial}} {{s.month1.practical}}
+		<tr {%if not forloop.counter|divisibleby:"2"%}class='even_row' {%endif%}>
+		<td>{{s}}</td><td>{{s.paper_attend}}</td><td> {{s.month1.lecture}}</td><td> {{s.month1.tutorial}}</td><td> {{s.month1.practical}}</td>
+		</tr>
 	{%endfor%}
+	</table>
 	</div>
 {%endif%}
 {%endblock%}
