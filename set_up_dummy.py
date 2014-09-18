@@ -102,8 +102,8 @@ for i in papers:
 	a=college.models.paper()
 	a.code=i['code']
 	a.name=i['name']
-	a.semester=random.choice([1,2,3,4,5,6])
-	a.course=random.choice(college.models.course.objects.all())
+	a.semester=1
+	a.course=college.models.course.objects.first()
 	a.save()
 print 'Papers Added'
 
@@ -214,36 +214,65 @@ for i in range(20):
 	now=timezone.now()
 	a.time_from=datetime.datetime(now.date().year,now.date().month,random.choice(range(1,21)),now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
 	now=a.time_from
-	a.time_to=datetime.datetime(now.date().year,now.date().month,now.date().day,now.time().hour+random.choice((1,2,3)),now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
+	a.time_to=datetime.datetime(now.date().year,now.date().month,random.choice(range(now.date().day,22)),now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
 	a.approved=True;
 	a.save()
 print 'reservations added'
 
 #add dummy attendence for student 1
-mth_t=attendence.models.month_total()
-mth_t.lecture=40
-mth_t.tutorial=30
-mth_t.practical=21
-mth_t.save()
+mth_t1=attendence.models.month_total()
+mth_t1.lecture=40
+mth_t1.tutorial=4
+mth_t1.practical=21
+mth_t1.save()
 
-mth_r=attendence.models.month_record()
-mth_r.lecture=40
-mth_r.tutorial=25
-mth_r.practical=2
-mth_r.save()
+mth_t2=attendence.models.month_total()
+mth_t2.lecture=42
+mth_t2.tutorial=3
+mth_t2.practical=29
+mth_t2.save()
 
+mth_t3=attendence.models.month_total()
+mth_t3.lecture=35
+mth_t3.tutorial=6
+mth_t3.practical=19
+mth_t3.save()
+
+mth_r1=attendence.models.month_record()
+mth_r1.lecture=40
+mth_r1.tutorial=2
+mth_r1.practical=20
+mth_r1.save()
+
+mth_r2=attendence.models.month_record()
+mth_r2.lecture=33
+mth_r2.tutorial=3
+mth_r2.practical=8
+mth_r2.save()
+
+mth_r3=attendence.models.month_record()
+mth_r3.lecture=15
+mth_r3.tutorial=25
+mth_r3.practical=2
+mth_r3.save()
 
 s=college.models.student.objects.first()
-paper_attend=attendence.models.paper_attend()
 
-paper_attend.paper=college.models.paper.objects.filter(course=s.course).order_by('id')[0]
-
-paper_attend.save()
-
-st_at=attendence.models.student_attend()
-st_at.student=s
-st_at.paper_attend=paper_attend
-st_at.save()
+for paper in college.models.paper.objects.filter(course=s.course).order_by('id'):
+	paper_att=attendence.models.paper_attend()
+	paper_att.paper=paper
+	paper_att.month_total_1=mth_t1
+	paper_att.month_total_2=mth_t2
+	paper_att.month_total_3=mth_t3
+	paper_att.save()
+	
+	st_at=attendence.models.student_attend()
+	st_at.student=s
+	st_at.paper_attend=paper_att
+	st_at.month1=mth_r1
+	st_at.month2=mth_r2
+	st_at.month3=mth_r3
+	st_at.save()
 
 print 'Attendence added'
 

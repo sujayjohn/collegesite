@@ -54,8 +54,6 @@ class month_record(models.Model):
 
 		
 class paper_attend(models.Model):
-	def __unicode__(self):
-		return self.paper
 	paper=models.ForeignKey(college_models.paper)
 	date_from=models.DateField(default=timezone.now())
 	date_upto=models.DateField(default=timezone.now())

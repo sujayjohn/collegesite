@@ -36,10 +36,63 @@
 
 {%if class_attend%}
 	<hr>
-	<div id='class_attendence'>
-		<div style="width: 50%;float:right;">
-					<canvas id="canvas" height="450" width="600"></canvas>
-		</div>
+	<div id='tabs'>
+		
+		{%regroup class_attend by student as student_list%}
+		<ul>		
+			{%for student in student_list%}
+				<li><a href='#{{forloop.counter}}'>{{student.grouper}}</a></li>	
+			{%endfor%}
+		</ul>
+		{%for student in student_list%}
+			<div id='{{forloop.counter}}'>
+				<div style="width: 50%;float:right;">
+							<canvas id="canvas_{{student.grouper|cut:' '}}" height="450" width="600"></canvas>
+				</div>
+				<script>
+				var data={labels:[],datasets:[]};
+				var lecture={
+								fillColor : "rgba(220,220,220,0.5)",
+								strokeColor : "rgba(220,220,220,0.8)",
+								highlightFill: "rgba(220,220,220,0.75)",
+								highlightStroke: "rgba(220,220,220,1)",
+								data : []
+							};
+					data.datasets.push(lecture);
+					var tutorial={
+								fillColor : "rgba(151,187,205,0.5)",
+								strokeColor : "rgba(151,187,205,0.8)",
+								highlightFill : "rgba(151,187,205,0.75)",
+								highlightStroke : "rgba(151,187,205,1)",
+								data : []
+							};
+					data.datasets.push(tutorial);
+					var practical={
+								fillColor : "rgba(151,187,100,0.5)",
+								strokeColor : "rgba(151,187,205,0.8)",
+								highlightFill : "rgba(151,187,205,0.75)",
+								highlightStroke : "rgba(151,187,205,1)",
+								data : []
+							}
+					data.datasets.push(practical);
+					lecture=data.datasets[0].data;
+					tutorial=data.datasets[1].data;
+					practical=data.datasets[2].data;
+				{%for rec in student.list%}
+					data.labels.push('{{rec.paper_attend.paper.code}}');
+					lecture.push({{rec.month1.lecture|default:0}});
+					tutorial.push({{rec.month1.tutorial|default:0}});
+					practical.push({{rec.month1.practical|default:0}});
+
+				{%endfor%}
+				var ctx = $("#canvas_{{student.grouper|cut:' '}}").get(0).getContext("2d");
+				new Chart(ctx).Bar(data, {
+				responsive : true, scaleFontColor: "black",
+				});
+				</script>
+			</div>
+		{%endfor%}
+				
 	</div>
 {%endif%}
 {%endblock%}
