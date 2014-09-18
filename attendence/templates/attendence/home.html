@@ -4,8 +4,6 @@
 {%block header%}
 	{%load static%}
 	<link rel="stylesheet" type="text/css" href="{% static "attendence/home.css"%}"></link>
-	
-	<script type='text/javascript' src="{%static 'college/jquery.min.js'%}"></script>
 	<script type='text/javascript' src="{%static 'attendence/home.js'%}"></script>
 {%endblock%}
 
@@ -38,7 +36,7 @@
 	<table>
 	{%for s in class_attendence%}
 		<tr {%if not forloop.counter|divisibleby:"2"%}class='even_row' {%endif%}>
-		<td>{{s}}</td><td>{{s.paper_attend}}</td><td> {{s.month1.lecture}}</td><td> {{s.month1.tutorial}}</td><td> {{s.month1.practical}}</td>
+		{%ifchanged%}<td>{{s}}</td>{%endifchanged%}<td>{{s.paper_attend}}</td><td> {{s.month1.lecture}}</td><td> {{s.month1.tutorial}}</td><td> {{s.month1.practical}}</td>
 		</tr>
 	{%endfor%}
 	</table>
