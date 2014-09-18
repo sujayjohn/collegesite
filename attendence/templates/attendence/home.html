@@ -4,7 +4,9 @@
 {%block header%}
 	{%load static%}
 	<link rel="stylesheet" type="text/css" href="{% static "attendence/home.css"%}"></link>
+	<script type='text/javascript' src="{%static 'attendence/Chart.min.js'%}"></script>
 	<script type='text/javascript' src="{%static 'attendence/home.js'%}"></script>
+	
 {%endblock%}
 
 
@@ -30,16 +32,14 @@
 	<button id='get_attendence'>Get Attendence</button>
 	{{error}}
 </div>
-{%if class_attendence%}
+
+
+{%if class_attend%}
 	<hr>
 	<div id='class_attendence'>
-	<table>
-	{%for s in class_attendence%}
-		<tr {%if not forloop.counter|divisibleby:"2"%}class='even_row' {%endif%}>
-		{%ifchanged%}<td>{{s}}</td>{%endifchanged%}<td>{{s.paper_attend}}</td><td> {{s.month1.lecture}}</td><td> {{s.month1.tutorial}}</td><td> {{s.month1.practical}}</td>
-		</tr>
-	{%endfor%}
-	</table>
+		<div style="width: 50%;float:right;">
+					<canvas id="canvas" height="450" width="600"></canvas>
+		</div>
 	</div>
 {%endif%}
 {%endblock%}

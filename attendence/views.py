@@ -17,8 +17,8 @@ def home(request,classid=None):
 			c_id,s_id=map(int,classid.split('-'))
 			cou=college.models.course.objects.get(pk=c_id)
 			psp=college.models.paper.objects.filter(course=cou).filter(semester=s_id)
-			att=attend.models.student_attend.objects.filter(paper_attend__in=psp).order_by('student')
-			data['class_attendence']=att
+			att=attend.models.student_attend.objects.filter(paper_attend__in=psp).order_by('student','paper_attend')
+			data['class_attend']=att
 		except Exception as e:
 			print e
 			data['error']=e
