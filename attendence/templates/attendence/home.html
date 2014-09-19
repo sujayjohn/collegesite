@@ -39,63 +39,66 @@
 	<div id='tabs'>
 		
 		{%regroup class_attend by student as student_list%}
+		
 		<div id='namecloud'>
 			{%for student in student_list%}
 				<a href='#'id='{{forloop.counter}}'>{{student.grouper}}</a>
 			{%endfor%}
 		</div>
-		<script>var datalist=[];</script>
-		{%for student in student_list%}
-			<div id='{{forloop.counter}}'>
-				<div style="width: 50%;float:right;">
-							<canvas id="canvas" height="450" width="600"></canvas>
-				</div>
-				<script>
-				var data={labels:[],datasets:[]};
-				var lecture={
-								fillColor : "rgba(220,220,220,0.5)",
-								strokeColor : "rgba(220,220,220,0.8)",
-								highlightFill: "rgba(220,220,220,0.75)",
-								highlightStroke: "rgba(220,220,220,1)",
-								data : []
-							};
-					data.datasets.push(lecture);
-					var tutorial={
-								fillColor : "rgba(151,187,205,0.5)",
-								strokeColor : "rgba(151,187,205,0.8)",
-								highlightFill : "rgba(151,187,205,0.75)",
-								highlightStroke : "rgba(151,187,205,1)",
-								data : []
-							};
-					data.datasets.push(tutorial);
-					var practical={
-								fillColor : "rgba(151,187,100,0.5)",
-								strokeColor : "rgba(151,187,205,0.8)",
-								highlightFill : "rgba(151,187,205,0.75)",
-								highlightStroke : "rgba(151,187,205,1)",
-								data : []
-							}
-					data.datasets.push(practical);
-					lecture=data.datasets[0].data;
-					tutorial=data.datasets[1].data;
-					practical=data.datasets[2].data;
+		{%regroup class_attend by paper_attend.paper as paper_list%}
+		<div id='chart_dock'>
+			<table>
+			<thead>
+				<td>Paper</td>
+				<td>Lecture</td>
+				<td>Tutorial</td>
+				<td>Practical</td>
+			</thead>
+			<tbody>
+			{%for paper in paper_list%}
+				<tr>
+					<td>{{paper.grouper}}</td>
+					<td><canvas id="chart-{{paper.grouper|slugify}}_l" width=100 height=100 /></td>
+					<td><canvas id="chart-{{paper.grouper|slugify}}_t" width=100 height=100 /></td>
+					<td><canvas id="chart-{{paper.grouper|slugify}}_p" width=100 height=100 /></td>
+				</tr>
+			{%endfor%}
+			</tbody>
+			</table>
+		</div>
+		<script>
+		var le=[attended,missed];
+		var t=[attended,missed];
+		var p=[attended,missed];
+			{%for student in student_list%}
+			var stu_data={};
 				{%for rec in student.list%}
-					data.labels.push('{{rec.paper_attend.paper.code}}');
-					
-					
-					
-					lecture.push({%widthratio rec.month1.lecture rec.paper_attend.month_total_1.lecture 100%});
-					tutorial.push({%widthratio rec.month1.tutorial rec.paper_attend.month_total_1.tutorial 100%});
-					practical.push({%widthratio rec.month1.practical rec.paper_attend.month_total_1.practical 100%});
-				datalist.push(data);
+					le[0].value={{rec.month1.lecture}};
+					le[1].value={{rec.paper_attend.month_total_1.lecture}}-{{rec.month1.lecture}};
+					t[0].value={{rec.month1.tutorial}};
+					t[1].value={{rec.paper_attend.month_total_1.tutorial}}-{{rec.month1.tutorial}};
+					p[0].value={{rec.month1.practical}};
+					p[1].value={{rec.paper_attend.month_total_1.practical}}-{{rec.month1.practical}};
+					console.log(le[0],le[1],t[0],t[1],p[0],p[1]);
+					console.log('-------------------------');
+					stu_data['{{rec.paper_attend.paper|slugify|cut:'-'}}']={'lec':le,'tut':t,'prc':p};
 				{%endfor%}
-				var ctx = $("#canvas").get(0).getContext("2d");
-				new Chart(ctx).Bar(data, {
-				responsive : true, scaleFontColor: "black",
-				});
-				</script>
-			</div>
+				classdata.push(stu_data);
+			{%endfor%}
+		var opt={scaleFontColor: "black"};
+		{% for paper in paper_list%}
+			var ctx_l = $("#chart-{{paper.grouper|slugify}}_l").get(0).getContext("2d");
+			var ctx_t = $("#chart-{{paper.grouper|slugify}}_t").get(0).getContext("2d");
+			var ctx_p = $("#chart-{{paper.grouper|slugify}}_p").get(0).getContext("2d");
+			var data=classdata[0].{{paper.grouper|slugify|cut:'-'}}.lec;
+			var  {{paper.grouper|slugify|cut:'-'}}_l= new Chart(ctx_l).Doughnut(data,opt);
+			data=classdata[0].{{paper.grouper|slugify|cut:'-'}}.tut;
+			var  {{paper.grouper|slugify|cut:'-'}}_t= new Chart(ctx_t).Doughnut(data,opt);
+			data=classdata[0].{{paper.grouper|slugify|cut:'-'}}.prc;
+			var  {{paper.grouper|slugify|cut:'-'}}_p= new Chart(ctx_p).Doughnut(data,opt);
 		{%endfor%}
+		</script>
+		
 				
 	</div>
 {%endif%}

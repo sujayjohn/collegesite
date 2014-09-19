@@ -10,3 +10,8 @@ float:left;
 margin-left:10px;
 margin-right:10px;
 }
+#chart_dock
+{width:50%;
+float:right;
+}
+

@@ -24,24 +24,14 @@ groupnames=['Principal','Bursar','Dean(Residence)','Dean(Academic Affairs)','Cha
 users=['staff_adv_1','staff_adv_2','office_window_1','office_window_2','office_inside_1','office_inside_2','notice_admin','registrar_of_soc',
 	'principal','bursar','seniortutor','dean(residence)','chaplain','dean(academic_affairs)','public_information_officer']
 papers=[
-	{'code':'MAPT-101','name':'Mathematics first year'},
-	{'code':'PHPT-101','name':'Physics first year'},
-	{'code':'MAPT-201','name':'Mathematics 2 year'},
-	{'code':'MAPT-301','name':'Mathematics f223irst year'},
-	{'code':'MAPT-401','name':'Mathematics firs223t year'},
-	{'code':'MAPT-501','name':'Mas first y456ear'},
-	{'code':'MAPT-102','name':'Mathematics first year'},
-	{'code':'PHPT-103','name':'Physics first year'},
-	{'code':'MAPT-204','name':'Mathematics 2 year'},
-	{'code':'MAPT-305','name':'Maths f223irst year'},
-	{'code':'MAPT-406','name':'Maics firs223t year'},
-	{'code':'MAPT-507','name':'Macs first y456ear'},
+	{'code':'MAPT-505','name':'Mathematics first year'},
+	{'code':'PHPT-505','name':'Physics first year'},
+	{'code':'CHCT-501','name':'Mathematics 2 year'},
+	{'code':'CSPT-505','name':'Mathematics f223irst year'},
 	]
-course_types=['UnderGraduate','PostGraduate','Vocational']
+course_types=['UnderGraduate']
 courses=[
 	{'name':'B.Sc. Physical Science'},
-	{'name':'B.Sc. Physics'},
-	{'name':'B.A. Programme'},
 	]
 departments=['Administration','Computer Science','Physics','Sports','English','Principal Office']
 societies=['Computer Science Society','Alumni Cell','Bazam-e-Adab','The Chemistry Society','B.A. Society','SUS','SSL']
@@ -94,7 +84,7 @@ print 'Course Type Added'
 for i in courses:
 	a=college.models.course()
 	a.name=i['name']
-	a.type_of_course=random.choice(college.models.course_type.objects.all())
+	a.type_of_course=college.models.course_type.objects.first()
 	a.save()
 print 'Courses added'
 #add papers
@@ -103,9 +93,7 @@ for k,i in enumerate(papers):
 	a.code=i['code']
 	a.name=i['name']
 	a.semester=1
-	c=college.models.course.objects.first()
-	a.course=c if k%2!=0 else college.models.course.objects.last()
-	c=a.course
+	a.course=college.models.course.objects.first()
 	a.save()
 print 'Papers Added'
 
@@ -222,60 +210,28 @@ for i in range(20):
 print 'reservations added'
 
 
-#add dummy attendence for student 1
+#add dummy attendence for students
 for s in college.models.student.objects.all():
-	mth_t1=attendence.models.month_total()
-	mth_t1.lecture=random.random()*50
-	mth_t1.tutorial=random.random()*5
-	mth_t1.practical=random.random()*30
-	mth_t1.save()
-	#-----------------
-	mth_t2=attendence.models.month_total()
-	mth_t2.lecture=random.random()*50
-	mth_t2.tutorial=random.random()*5
-	mth_t2.practical=random.random()*30
-	mth_t2.save()
-	#-----------------
-	mth_t3=attendence.models.month_total()
-	mth_t3.lecture=random.random()*50
-	mth_t3.tutorial=random.random()*5
-	mth_t3.practical=random.random()*30
-	mth_t3.save()
-	#-----------------
-	mth_r1=attendence.models.month_record()
-	mth_r1.lecture=random.random()*mth_t1.lecture
-	mth_r1.tutorial=random.random()*mth_t1.tutorial
-	mth_r1.practical=random.random()*mth_t1.practical
-	mth_r1.save()
-	#-----------------
-	mth_r2=attendence.models.month_record()
-	mth_r2.lecture=random.random()*mth_t2.lecture
-	mth_r2.tutorial=random.random()*mth_t2.tutorial
-	mth_r2.practical=random.random()*mth_t2.practical
-	mth_r2.save()
-	#-----------------
-	mth_r3=attendence.models.month_record()
-	mth_r3.lecture=random.random()*mth_t3.lecture
-	mth_r3.tutorial=random.random()*mth_t3.tutorial
-	mth_r3.practical=random.random()*mth_t3.practical
-	mth_r3.save()
-	#-----------------
-	#-----------------
-	#-----------------
-	for paper in college.models.paper.objects.filter(course=s.course).order_by('id'):
+	for paper in college.models.paper.objects.filter(course=s.course).filter(semester=1).order_by('id'):
+		mth_t1=attendence.models.month_total()
+		mth_t1.lecture=random.random()*50
+		mth_t1.tutorial=random.random()*20
+		mth_t1.practical=random.random()*30
+		mth_t1.save()
+		mth_r1=attendence.models.month_record()
+		mth_r1.lecture=random.random()*mth_t1.lecture
+		mth_r1.tutorial=random.random()*mth_t1.tutorial
+		mth_r1.practical=random.random()*mth_t1.practical
+		mth_r1.save()
 		paper_att=attendence.models.paper_attend()
 		paper_att.paper=paper
 		paper_att.month_total_1=mth_t1
-		paper_att.month_total_2=mth_t2
-		paper_att.month_total_3=mth_t3
 		paper_att.save()
 		#-----------------
 		st_at=attendence.models.student_attend()
 		st_at.student=s
 		st_at.paper_attend=paper_att
 		st_at.month1=mth_r1
-		st_at.month2=mth_r2
-		st_at.month3=mth_r3
 		st_at.save()
 
 
