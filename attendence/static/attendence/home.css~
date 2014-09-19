@@ -2,3 +2,10 @@
 {
 background:lightblue;
 }
+#namecloud
+{max-width:40%;}
+#namecloud a
+{
+float:left;
+margin-left:10px;
+}

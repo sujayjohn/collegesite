@@ -5,5 +5,8 @@ $(document).ready(function() {
 		var class_id=course+'-'+semester;
 		document.location.href=$('#attendence_url').val()+class_id;
 	});
-
+	$('#namecloud a').click(function () {  
+	
+	console.log(this.id);
+	});
 });

@@ -64,7 +64,7 @@ WSGI_APPLICATION = 'stephens.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -83,7 +83,7 @@ DATABASES = {
         'PORT': '',                            # Set to empty string for default. Not used with sqlite3.
    }
 }
-
+'''
 
 
 # Internationalization

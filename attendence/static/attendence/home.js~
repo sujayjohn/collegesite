@@ -5,18 +5,8 @@ $(document).ready(function() {
 		var class_id=course+'-'+semester;
 		document.location.href=$('#attendence_url').val()+class_id;
 	});
-	  
-	$('#tabs div').hide();
-	$('#tabs div:first').show();
-	$('#tabs ul li:first').addClass('active');
- 
-	$('#tabs ul li a').click(function(){
-		new Chart(ctx).Bar(data, {responsive : true, scaleFontColor: "black",});
-		$('#tabs ul li').removeClass('active');
-		$(this).parent().addClass('active');
-		var currentTab = $(this).attr('href');
-		$('#tabs div').hide();
-		$(currentTab).show();
-		return false;
+	$('#namecloud a').click(function () {  
+	
+	console.log(this);
 	});
 });
