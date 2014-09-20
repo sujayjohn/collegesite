@@ -42,10 +42,9 @@
 		
 		<div id='namecloud'>
 			{%for student in student_list%}
-				<a href='#'id='{{forloop.counter}}'>{{student.grouper}}</a>
+				<a href='#'id='{{forloop.counter0}}'>{{student.grouper}}</a>
 			{%endfor%}
 		</div>
-		{%regroup class_attend by paper_attend.paper as paper_list%}
 		<div id='chart_dock'>
 			<table>
 			<thead>
@@ -55,30 +54,27 @@
 				<td>Practical</td>
 			</thead>
 			<tbody>
-			{%for paper in paper_list%}
+			{%for paper_atd in paper_list%}
+				{%ifchanged paper_atd.paper%}
 				<tr>
-					<td>{{paper.grouper}}</td>
-					<td><canvas id="chart-{{paper.grouper|slugify}}_l" width=100 height=100 /></td>
-					<td><canvas id="chart-{{paper.grouper|slugify}}_t" width=100 height=100 /></td>
-					<td><canvas id="chart-{{paper.grouper|slugify}}_p" width=100 height=100 /></td>
+					<td>{{paper_atd.paper}}</td>
+					<td><canvas id="chart-{{paper_atd.paper|slugify}}_l" width=100 height=100 /></td>
+					<td><canvas id="chart-{{paper_atd.paper|slugify}}_t" width=100 height=100 /></td>
+					<td><canvas id="chart-{{paper_atd.paper|slugify}}_p" width=100 height=100 /></td>
 				</tr>
+				{%endifchanged%}
 			{%endfor%}
 			</tbody>
 			</table>
 		</div>
 		<script>
-		var le=[attended,missed];
-		var t=[attended,missed];
-		var p=[attended,missed];
 			{%for student in student_list%}
 			var stu_data={};
 				{%for rec in student.list%}
-					le[0].value={{rec.month1.lecture}};
-					le[1].value={{rec.paper_attend.month_total_1.lecture}}-{{rec.month1.lecture}};
-					t[0].value={{rec.month1.tutorial}};
-					t[1].value={{rec.paper_attend.month_total_1.tutorial}}-{{rec.month1.tutorial}};
-					p[0].value={{rec.month1.practical}};
-					p[1].value={{rec.paper_attend.month_total_1.practical}}-{{rec.month1.practical}};
+					var le=[new attended({{rec.month1.lecture}}),new missed({{rec.paper_attend.month_total_1.lecture}}-{{rec.month1.lecture}})];
+					var t=[new attended({{rec.month1.tutorial}}),new missed({{rec.paper_attend.month_total_1.tutorial}}-{{rec.month1.tutorial}})];
+					var p=[new attended({{rec.month1.practical}}),new missed({{rec.paper_attend.month_total_1.practical}}-{{rec.month1.practical}})];
+
 					console.log(le[0],le[1],t[0],t[1],p[0],p[1]);
 					console.log('-------------------------');
 					stu_data['{{rec.paper_attend.paper|slugify|cut:'-'}}']={'lec':le,'tut':t,'prc':p};
@@ -86,17 +82,18 @@
 				classdata.push(stu_data);
 			{%endfor%}
 		var opt={scaleFontColor: "black"};
-		{% for paper in paper_list%}
-			var ctx_l = $("#chart-{{paper.grouper|slugify}}_l").get(0).getContext("2d");
-			var ctx_t = $("#chart-{{paper.grouper|slugify}}_t").get(0).getContext("2d");
-			var ctx_p = $("#chart-{{paper.grouper|slugify}}_p").get(0).getContext("2d");
-			var data=classdata[0].{{paper.grouper|slugify|cut:'-'}}.lec;
-			var  {{paper.grouper|slugify|cut:'-'}}_l= new Chart(ctx_l).Doughnut(data,opt);
-			data=classdata[0].{{paper.grouper|slugify|cut:'-'}}.tut;
-			var  {{paper.grouper|slugify|cut:'-'}}_t= new Chart(ctx_t).Doughnut(data,opt);
-			data=classdata[0].{{paper.grouper|slugify|cut:'-'}}.prc;
-			var  {{paper.grouper|slugify|cut:'-'}}_p= new Chart(ctx_p).Doughnut(data,opt);
+		{% for paper_atd in paper_list%}
+			var ctx_l = $("#chart-{{paper_atd.paper|slugify}}_l").get(0).getContext("2d");
+			var ctx_t = $("#chart-{{paper_atd.paper|slugify}}_t").get(0).getContext("2d");
+			var ctx_p = $("#chart-{{paper_atd.paper|slugify}}_p").get(0).getContext("2d");
+			var data=classdata[0].{{paper_atd.paper|slugify|cut:'-'}}.lec;
+			var  {{paper_atd.paper|slugify|cut:'-'}}_l= new Chart(ctx_l).Doughnut(data,opt);
+			data=classdata[0].{{paper_atd.paper|slugify|cut:'-'}}.tut;
+			var  {{paper_atd.paper|slugify|cut:'-'}}_t= new Chart(ctx_t).Doughnut(data,opt);
+			data=classdata[0].{{paper_atd.paper|slugify|cut:'-'}}.prc;
+			var  {{paper_atd.paper|slugify|cut:'-'}}_p= new Chart(ctx_p).Doughnut(data,opt);
 		{%endfor%}
+		
 		</script>
 		
 				

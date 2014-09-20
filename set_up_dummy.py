@@ -35,7 +35,7 @@ courses=[
 	]
 departments=['Administration','Computer Science','Physics','Sports','English','Principal Office']
 societies=['Computer Science Society','Alumni Cell','Bazam-e-Adab','The Chemistry Society','B.A. Society','SUS','SSL']
-students=['arjoonn sharma','gagan mahajan','karan jhunja','atima shahi']
+students=['arjoonn sharma','atima shahi']
 
 
 quotes=['He who has failed has tried something greater...',

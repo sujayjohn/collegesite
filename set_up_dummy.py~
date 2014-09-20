@@ -28,8 +28,6 @@ papers=[
 	{'code':'PHPT-505','name':'Physics first year'},
 	{'code':'CHCT-501','name':'Mathematics 2 year'},
 	{'code':'CSPT-505','name':'Mathematics f223irst year'},
-	{'code':'CSPT-606','name':'Mathematics f223irst year'},
-	{'code':'MAPT-606','name':'Mathematics f223irst year'},
 	]
 course_types=['UnderGraduate']
 courses=[
