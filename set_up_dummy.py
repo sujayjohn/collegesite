@@ -35,7 +35,7 @@ courses=[
 	]
 departments=['Administration','Computer Science','Physics','Sports','English','Principal Office']
 societies=['Computer Science Society','Alumni Cell','Bazam-e-Adab','The Chemistry Society','B.A. Society','SUS','SSL']
-students=['arjoonn sharma','atima shahi']
+students=['ajit deshpande','anurag banerjee','ashwatth verma','deepak kumar','ishan taneja','arjoonn sharma','atima shahi','gagan mahajan','kopal dixit']
 
 
 quotes=['He who has failed has tried something greater...',
@@ -211,17 +211,18 @@ print 'reservations added'
 
 
 #add dummy attendence for students
-for s in college.models.student.objects.all():
-	for paper in college.models.paper.objects.filter(course=s.course).filter(semester=1).order_by('id'):
-		mth_t1=attendence.models.month_total()
-		mth_t1.lecture=10+(random.random()*40)
-		mth_t1.tutorial=10+(random.random()*10)
-		mth_t1.practical=10+(random.random()*20)
-		mth_t1.save()
+s=college.models.student.objects.first()
+for paper in college.models.paper.objects.filter(course=s.course).filter(semester=1).order_by('id'):
+	mth_t1=attendence.models.month_total()
+	mth_t1.lecture=10+int(random.random()*40)
+	mth_t1.tutorial=10+int(random.random()*10)
+	mth_t1.practical=10+int(random.random()*20)
+	mth_t1.save()
+	for s in college.models.student.objects.all():
 		mth_r1=attendence.models.month_record()
-		mth_r1.lecture=(0.1+random.random())*mth_t1.lecture
-		mth_r1.tutorial=(0.1+random.random())*mth_t1.tutorial
-		mth_r1.practical=(0.1+random.random())*mth_t1.practical
+		mth_r1.lecture=random.choice(range(mth_t1.lecture))
+		mth_r1.tutorial=random.choice(range(mth_t1.tutorial))
+		mth_r1.practical=random.choice(range(mth_t1.practical))
 		mth_r1.save()
 		paper_att=attendence.models.paper_attend()
 		paper_att.paper=paper

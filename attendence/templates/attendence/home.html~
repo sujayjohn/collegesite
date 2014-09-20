@@ -6,19 +6,16 @@
 	<link rel="stylesheet" type="text/css" href="{% static "attendence/home.css"%}"></link>
 	<script type='text/javascript' src="{%static 'attendence/Chart.min.js'%}"></script>
 	<script type='text/javascript' src="{%static 'attendence/home.js'%}"></script>
-	
 {%endblock%}
 
 
 {%block body%}
-
 <input type='hidden' value='{{url}}' id='attendence_url'></input>
 <div>
 	<select id='course'>
 		{%for course in courses%}
-			<option value={{course.id}}>{{course.name}}</option>
+			<option value='{{course.id}}' >{{course.name}}</option>
 		{%endfor%}
-		
 	</select>
 	<select id='semester'>
 		<option value=1>1</option>
@@ -27,31 +24,29 @@
 		<option value=1>4</option>
 		<option value=1>5</option>
 		<option value=1>6</option>
-		
 	</select>
 	<button id='get_attendence'>Get Attendence</button>
-	{{error}}
+	{%if error%}ERROR:{{error}}{%endif%}
 </div>
 
 
 {%if class_attend%}
 	<hr>
-	<div id='tabs'>
-		
 		{%regroup class_attend by student as student_list%}
 		
 		<div id='namecloud'>
 			{%for student in student_list%}
-				<a href='#'id='{{forloop.counter0}}'>{{student.grouper}}</a>
+				<a href='#'id='{{forloop.counter0}}' {%if forloop.counter == 1%}class='active_name'{%endif%}>{{student.grouper}}</a>
 			{%endfor%}
 		</div>
 		<div id='chart_dock'>
 			<table>
-			<thead>
+			<thead><b>
 				<td>Paper</td>
 				<td>Lecture</td>
 				<td>Tutorial</td>
 				<td>Practical</td>
+				
 			</thead>
 			<tbody>
 			{%for paper_atd in paper_list%}
@@ -100,8 +95,5 @@
 			{%endifchanged%}
 		{%endfor%}
 		</script>
-		
-				
-	</div>
 {%endif%}
 {%endblock%}

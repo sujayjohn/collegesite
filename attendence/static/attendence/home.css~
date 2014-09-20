@@ -3,15 +3,22 @@
 background:lightblue;
 }
 #namecloud
-{max-width:40%;}
+{max-width:40%;float:left;}
+.active_name , .active_name:hover
+{
+color:black;
+
+}
 #namecloud a
 {
 float:left;
 margin-left:10px;
 margin-right:10px;
+margin-bottom:10px;
 }
 #chart_dock
 {width:50%;
 float:right;
+text-align:center;
 }
 
