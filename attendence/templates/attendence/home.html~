@@ -74,26 +74,31 @@
 					var le=[new attended({{rec.month1.lecture}}),new missed({{rec.paper_attend.month_total_1.lecture}}-{{rec.month1.lecture}})];
 					var t=[new attended({{rec.month1.tutorial}}),new missed({{rec.paper_attend.month_total_1.tutorial}}-{{rec.month1.tutorial}})];
 					var p=[new attended({{rec.month1.practical}}),new missed({{rec.paper_attend.month_total_1.practical}}-{{rec.month1.practical}})];
-
-					console.log(le[0],le[1],t[0],t[1],p[0],p[1]);
-					console.log('-------------------------');
 					stu_data['{{rec.paper_attend.paper|slugify|cut:'-'}}']={'lec':le,'tut':t,'prc':p};
 				{%endfor%}
 				classdata.push(stu_data);
 			{%endfor%}
 		var opt={scaleFontColor: "black"};
-		{% for paper_atd in paper_list%}
-			var ctx_l = $("#chart-{{paper_atd.paper|slugify}}_l").get(0).getContext("2d");
-			var ctx_t = $("#chart-{{paper_atd.paper|slugify}}_t").get(0).getContext("2d");
-			var ctx_p = $("#chart-{{paper_atd.paper|slugify}}_p").get(0).getContext("2d");
-			var data=classdata[0].{{paper_atd.paper|slugify|cut:'-'}}.lec;
-			var  {{paper_atd.paper|slugify|cut:'-'}}_l= new Chart(ctx_l).Doughnut(data,opt);
-			data=classdata[0].{{paper_atd.paper|slugify|cut:'-'}}.tut;
-			var  {{paper_atd.paper|slugify|cut:'-'}}_t= new Chart(ctx_t).Doughnut(data,opt);
-			data=classdata[0].{{paper_atd.paper|slugify|cut:'-'}}.prc;
-			var  {{paper_atd.paper|slugify|cut:'-'}}_p= new Chart(ctx_p).Doughnut(data,opt);
-		{%endfor%}
 		
+		{% for paper_atd in paper_list%}
+			{%ifchanged paper_atd.paper%}
+				var ctx_l = $("#chart-{{paper_atd.paper|slugify}}_l").get(0).getContext("2d");
+				var ctx_t = $("#chart-{{paper_atd.paper|slugify}}_t").get(0).getContext("2d");
+				var ctx_p = $("#chart-{{paper_atd.paper|slugify}}_p").get(0).getContext("2d");
+				var data=classdata[0].{{paper_atd.paper|slugify|cut:'-'}}.lec;
+				chart_list['{{paper_atd.paper|slugify|cut:'-'}}_l']= new Chart(ctx_l).Doughnut(data,opt);
+				
+				data=classdata[0].{{paper_atd.paper|slugify|cut:'-'}}.tut;
+				chart_list['{{paper_atd.paper|slugify|cut:'-'}}_t']= new Chart(ctx_t).Doughnut(data,opt);
+				data=classdata[0].{{paper_atd.paper|slugify|cut:'-'}}.prc;
+				chart_list['{{paper_atd.paper|slugify|cut:'-'}}_p']= new Chart(ctx_p).Doughnut(data,opt);
+			{%endifchanged%}
+		{%endfor%}
+		{% for paper_atd in paper_list%}
+			{%ifchanged paper_atd.paper%}
+				paper_access_list.push('{{paper_atd.paper|slugify|cut:'-'}}');
+			{%endifchanged%}
+		{%endfor%}
 		</script>
 		
 				

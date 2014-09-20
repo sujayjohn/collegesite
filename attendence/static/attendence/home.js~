@@ -15,6 +15,7 @@ function missed(value){
 	};
 var classdata=[];
 var paper_access_list=[];
+var chart_list={};
 
 //..........................................................
 $(document).ready(function() {  
@@ -29,6 +30,20 @@ $(document).ready(function() {
 	var new_student_data=classdata[this.id];
 	for(var i=0;i<paper_access_list.length;i+=1)
 		{
+		chart_list[paper_access_list[i]+'_l'].removeData();
+		chart_list[paper_access_list[i]+'_t'].removeData();
+		chart_list[paper_access_list[i]+'_p'].removeData();
+		
+		chart_list[paper_access_list[i]+'_l'].removeData();
+		chart_list[paper_access_list[i]+'_t'].removeData();
+		chart_list[paper_access_list[i]+'_p'].removeData();
+		
+		chart_list[paper_access_list[i]+'_l'].addData(classdata[this.id][paper_access_list[i]].lec[0]);
+		chart_list[paper_access_list[i]+'_l'].addData(classdata[this.id][paper_access_list[i]].lec[1]);
+		chart_list[paper_access_list[i]+'_t'].addData(classdata[this.id][paper_access_list[i]].tut[0]);
+		chart_list[paper_access_list[i]+'_t'].addData(classdata[this.id][paper_access_list[i]].tut[1]);
+		chart_list[paper_access_list[i]+'_p'].addData(classdata[this.id][paper_access_list[i]].prc[0]);
+		chart_list[paper_access_list[i]+'_p'].addData(classdata[this.id][paper_access_list[i]].prc[1]);		
 		}
 	console.log(this.id);
 	});

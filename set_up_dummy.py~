@@ -35,7 +35,7 @@ courses=[
 	]
 departments=['Administration','Computer Science','Physics','Sports','English','Principal Office']
 societies=['Computer Science Society','Alumni Cell','Bazam-e-Adab','The Chemistry Society','B.A. Society','SUS','SSL']
-students=['arjoonn sharma','gagan mahajan','karan jhunja','atima shahi']
+students=['arjoonn sharma','atima shahi']
 
 
 quotes=['He who has failed has tried something greater...',
@@ -214,9 +214,9 @@ print 'reservations added'
 for s in college.models.student.objects.all():
 	for paper in college.models.paper.objects.filter(course=s.course).filter(semester=1).order_by('id'):
 		mth_t1=attendence.models.month_total()
-		mth_t1.lecture=random.random()*50
-		mth_t1.tutorial=random.random()*20
-		mth_t1.practical=random.random()*30
+		mth_t1.lecture=10+(random.random()*40)
+		mth_t1.tutorial=10+(random.random()*10)
+		mth_t1.practical=10+(random.random()*20)
 		mth_t1.save()
 		mth_r1=attendence.models.month_record()
 		mth_r1.lecture=random.random()*mth_t1.lecture

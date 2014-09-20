@@ -214,14 +214,14 @@ print 'reservations added'
 for s in college.models.student.objects.all():
 	for paper in college.models.paper.objects.filter(course=s.course).filter(semester=1).order_by('id'):
 		mth_t1=attendence.models.month_total()
-		mth_t1.lecture=random.random()*50
-		mth_t1.tutorial=random.random()*20
-		mth_t1.practical=random.random()*30
+		mth_t1.lecture=10+(random.random()*40)
+		mth_t1.tutorial=10+(random.random()*10)
+		mth_t1.practical=10+(random.random()*20)
 		mth_t1.save()
 		mth_r1=attendence.models.month_record()
-		mth_r1.lecture=random.random()*mth_t1.lecture
-		mth_r1.tutorial=random.random()*mth_t1.tutorial
-		mth_r1.practical=random.random()*mth_t1.practical
+		mth_r1.lecture=(0.1+random.random())*mth_t1.lecture
+		mth_r1.tutorial=(0.1+random.random())*mth_t1.tutorial
+		mth_r1.practical=(0.1+random.random())*mth_t1.practical
 		mth_r1.save()
 		paper_att=attendence.models.paper_attend()
 		paper_att.paper=paper
