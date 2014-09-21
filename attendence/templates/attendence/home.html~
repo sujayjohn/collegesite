@@ -41,7 +41,7 @@
 		</div>
 		<div id='chart_dock'>
 			<table>
-			<thead><b>
+			<thead>
 				<td>Paper</td>
 				<td>Lecture</td>
 				<td>Tutorial</td>

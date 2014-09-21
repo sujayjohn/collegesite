@@ -15,46 +15,43 @@
 	{%endfor%}
 </div>
 {%endif%}
-<hr>
+<br>
+<div id='dock'>
 	<div class='homedock'>
-	<a class='menu'>APPLICATIONS</a><hr>
-		<ul class='submenu'>
-			<a href='{%url 'docs_home'%}' ><li>Office</li></a>
-			<a href='{%url "attend_home"%}'><li>Attendence</li></a>
-			<a href='{%url 'roombook_home'%}'><li>Room Booking</li></a>
-			<a href='{%url 'news_home'%}'><li>Notice Board</li></a>
-			<a href='http://library.ststephens.edu/'><li>e-Library</li></a>
-			<a href=''><li>Forms</li></a>
-		</ul>
+		
+		<div class='submenu'>
+			<ul>
+				<a href='{%url 'docs_home'%}' ><li>Office</li></a>
+				<a href='{%url "attend_home"%}'><li>Attendence</li></a>
+				<a href='{%url 'roombook_home'%}'><li>Room Booking</li></a>
+				<a href='{%url 'news_home'%}'><li>Notice Board</li></a>
+				<a href='http://library.ststephens.edu/'><li>e-Library</li></a>
+				<a href=''><li>Forms</li></a>
+			</ul>
+		</div>
+		<a class='menu'>APPLICATIONS</a>
+		
 	</div>
 	<div class='homedock'>
-	<a href='{%url 'news_home'%}'>NEWS FEED</a>
-		<div id='icons'>
-				<a href='{%url 'news_rss'%}'>
-				<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
-				</a>
-				
-		</div>
-		<hr>
+	<a class='menu'>NEWS FEED</a>
+		<div class='submenu'>
 		<ul>
 			{%for n in news%}
 			<a href='{%url "notice" n.id%}'><li>{{n.title|truncatewords:"5"}}</li></a>
 			{%endfor%}
 			<a href='{%url 'news_home'%}'><li>more...</li></a>
 		</ul>
-	</div>
-	
-	<div class='homedock'>
-	<a href='{%url "notification_view"%}'>NOTIFICATIONS</a>
-	<div id='icons'>
-				<a href='{%url 'notification_rss'%}'>
+		</div>
+		<div id='icons'>
+				<a href='{%url 'news_rss'%}'>
 				<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
 				</a>
 				
+		</div>
 	</div>
 	
-	
-	<hr>
+	<div class='homedock'>
+		<div class='submenu'>
 		<ul>
 			{%for i in notifications%}
 					<li>
@@ -69,9 +66,17 @@
 			<a><li>more...</li></a>
 
 		</ul>
+		</div>
+		<a class='menu'>NOTIFICATIONS</a>
+		<div id='icons'>
+					<a href='{%url 'notification_rss'%}'>
+					<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
+					</a>
+				
+		</div>
 	</div>
 	<div class='homedock'>
-	<a href='{%url "events_home"%}'>EVENTS</a><hr>
+		<div class='submenu'>
 		<ul>
 			{%for i in events%}
 			<a><li></li></a>
@@ -79,11 +84,18 @@
 			{%endfor%}
 			<a href='{%url "events_home"%}'><li>more...</li></a>
 		</ul>
+		</div>
+		<a  class='menu'>EVENTS</a>
 	</div>
 	<div class='homedock'>
-	<a href='{%url "principal_home"%}'>Principal's Desk</a><hr>
+		<div class='submenu'>
+		<ul>
+			<a href='{%url "principal_home"%}'><li>more...</li></a>
+		</ul>
+		</div>
+		<a  class='menu'>Principal's Desk</a>
 	</div>
-	
+</div>
 
 
 

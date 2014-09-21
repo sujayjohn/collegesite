@@ -29,14 +29,13 @@ $(document).ready(function()
 		
 		if(X==1)
 		{
-
-		$(".submenu").hide();
+		$(".submenu").slideUp();
 		$(this).attr('id', '0');
 		}
 		else
 		{
 
-		$(".submenu").show();
+		$(".submenu").slideDown();
 		$(this).attr('id', '1');
 		}
 		
