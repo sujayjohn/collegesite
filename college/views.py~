@@ -162,7 +162,7 @@ def principal(request,docid=None):
 			if obj.alive:
 				data['notice']=obj
 			else:
-				data['notice']={'title':'Not Available','description':'This notification has been removed.','pub_date':None}	
+				data['notice']={'title':'Not Available','description':'This document has been removed.','pub_date':None}	
 	else:
 		docs=college_models.principal_desk.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date','-id')
 		data['principal_desk_docs']=docs

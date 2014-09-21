@@ -41,8 +41,6 @@ def office(request):
 	data['doc_form']=doc_form
 	data['can_add_new_doc']=request.user.has_perm('docs.add_doc')
 	#=====================
-	
-
 	data['docs_on_table']=doc.objects.filter(location=request.user.userprofile)
 	#=====================
 	return render(request,'docs/office.html',data)

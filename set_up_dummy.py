@@ -6,7 +6,7 @@ import datetime
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stephens.settings")
 
-
+from django.core.files import File
 import college
 import rss
 import docs
@@ -284,6 +284,19 @@ for paper in college.models.paper.objects.filter(course=s.course).filter(semeste
 print '......................................',
 print 'done'
 
+
+print 'uploading files'
+filepath='/home/ghost/Desktop/design4/dummy_files'
+path=os.path.join(filepath,'dummy_files.pdf')
+print path
+f=file(path)
+myFile=File(f)
+a=college.models.principal_desk()
+a.title='Why the IMBH course?'
+a.associated_file=myFile
+a.description='''A description of the IMBH course and why it was introduced.'''
+a.save()
+print '......................................done'
 
 
 

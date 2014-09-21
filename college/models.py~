@@ -22,7 +22,7 @@ class principal_desk(document):
 			return True
 		return False
 class custom_notice(document):
-	description=models.CharField(max_length=500)
+	description=models.CharField(max_length=800)
 	pub_date=models.DateTimeField(default=timezone.now())
 	def recent(self):
 		now=timezone.now()
@@ -76,7 +76,7 @@ class userprofile(models.Model):
 	def __unicode__(self):
 		return str(self.user.username)
 	user=models.OneToOneField(User)
-	title=models.CharField(max_length=15,blank=True,default=None)
+	title=models.CharField(max_length=15,blank=True,null=True,default=None)
 	picture=models.ImageField(upload_to='files/userpics',blank=True,null=True,default=None)
 	
 	dept=models.ForeignKey(department,related_name='dept')

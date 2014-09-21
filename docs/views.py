@@ -27,7 +27,7 @@ def home(request,docid=None):
 				
 	#office users go to office
 	if request.user.is_authenticated() and request.user.is_active and request.user.has_perm('docs.change_doc'):
-		
+		pass
 	return render(request,'docs/home.html',data)
 
 
