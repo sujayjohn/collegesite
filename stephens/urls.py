@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     url(r'^logout/$','django.contrib.auth.views.logout',{'template_name':'college/logged_out.html'}),
     
     url(r'^news/',include('rss.urls')),
-    url(r'^docs/',include('docs.urls')),
+    url(r'^office/',include('docs.urls')),
     url(r'^roombook/',include('roombook.urls')),
     url(r'^attendence/',include('attendence.urls')),
     

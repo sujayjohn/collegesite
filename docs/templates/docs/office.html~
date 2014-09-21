@@ -33,6 +33,9 @@
 			</form>
 	</div>
 	{%endif%}
+	{%if new_id%}
+		New document ID is- {{new_id}}
+	{%endif%}
 	
 	
 </div>

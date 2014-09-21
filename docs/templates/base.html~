@@ -22,10 +22,14 @@
 				Press the Enter Key
 			</div>
 		</div>
-		<div id='search_result'>
-			
-		</div>
-		
+
+			<table>
+			<tr><td>Reference No.</td><td>{{result.id}}</td></tr>
+			<tr><td>Location</td><td>{{result.location}}</td></tr>
+			<tr><td>Last accessed</td><td>{{result.last_accessed}}</td></tr>
+			<tr><td>Notes</td><td>{{result.notes}}</td></tr>
+			</table>
+
 		
 	</div>
 <hr>

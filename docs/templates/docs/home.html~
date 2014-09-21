@@ -26,7 +26,7 @@
 			<tr><td>Last accessed</td><td>{{result.last_accessed}}</td></tr>
 			<tr><td>Notes</td><td>{{result.notes}}</td></tr>
 			</table>
-			{%if result.ready and not error%}Document is ready for pickup{%endif%}
+			{%if result.ready%}Document is ready for pickup{%endif%}
 		{%endif%}
 		{%if error%}
 			{{error}}

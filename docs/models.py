@@ -50,7 +50,7 @@ class doctype_form(ModelForm):
 		
 class doc(models.Model):
 	def __unicode__(self):
-		return str(self.id)
+		return str(self.id)+'   '+str(self.doctype)
 	student=models.ForeignKey(student,related_name='student')
 	doctype=models.ForeignKey(doc_type,related_name='doctype')
 	location=models.ForeignKey(userprofile,related_name='location')
@@ -61,31 +61,17 @@ class doc(models.Model):
 	last_accessed=models.DateTimeField(auto_now=True)
 	pickup_date_time=models.DateTimeField(blank=True,null=True)
 
-	notes=models.CharField(max_length=150,blank=True)
+	notes=models.CharField(max_length=200,blank=True)
 	
 	
-	def pretty_print(self):
-		'''pretty prints the data in the database'''
-		data={}
-		data['Student']=self.student.name
-		
-		data['Last Accessed']=str(self.last_accessed.year)+'/'+str(self.last_accessed.month)+'/'+str(self.last_accessed.day)+'        '+str(self.last_accessed.hour)+':'+str(self.last_accessed.minute)+'  HRS'
-		if self.pickup_date_time==None:
-			data['Location']=self.location.user.username+ ' -  '+self.location.dept.name
-			if self.completed_date_time!=None:
-				data['Action']='Ready for Pickup'
-			else:
-				if self.notes!='':
-					data['Action']=self.notes.split('|')[-1]
-		else:
-			data['Action']='Document has been picked up'
-			data['Pickup Date']=str(self.pickup_date_time.year)+'/'+str(self.pickup_date_time.month)+'/'+str(self.pickup_date_time.day)+'        '+str(self.pickup_date_time.hour)+':'+str(self.pickup_date_time.minute)+'  HRS'
-			data.pop('Last Accessed')
-		return data
+	
 	def addnote(self,new_note):
 		self.notes+=' | '+new_note
 		self.save()
-	
+	def ready(self):
+		if self.completed_date_time!=None:
+			return True
+		return False
 	def move(self):
 		'''Moves the document to the next stage of processing'''
 		stages=self.doctype.stages()

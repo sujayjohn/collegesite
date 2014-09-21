@@ -8,31 +8,30 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_safe,require_http_methods
 import json
 
-def home(request):
+def home(request,docid=None):
 	data={}
+	
+	print '=====================',docid,type(docid)
+	if docid!=None:
+		docid=int(docid)
+		try:
+			obj=doc.objects.get(id=docid)
+			
+		except Exception as e:
+			print e
+			data['error']='The document does not exist.'
+		else:
+			if obj.pickup_date_time!=None:
+				data['error']='This document has been collected'
+			data['result']=obj
+				
 	#office users go to office
-	if request.user.is_authenticated():
-		if request.user.is_active:
-			if request.user.has_perm('docs.change_doc'):
-				return redirect('docs_office')
-	return render(request,'docs/home.html')
-
-@require_safe#no post requests
-def status(request,docid):
-	data={}
-	try:
-		obj=doc.objects.get(id=int(docid))
-	except Exception as e:
-		print e
-		data={'Error:  ':'This record does not exist'}
-		data=json.dumps(data)
-		return HttpResponse(data,content_type='application/json')
-	else:
-		data=obj.pretty_print()
-		data=json.dumps(data)
-		return HttpResponse(data,content_type='application/json')
+	if request.user.is_authenticated() and request.user.is_active and request.user.has_perm('docs.change_doc'):
 		
-@login_required	
+	return render(request,'docs/home.html',data)
+
+
+
 def office(request):
 	#only office users should be able to use
 	if (not request.user.has_perm('docs.change_doc')) or (not request.user.is_active):
@@ -42,12 +41,9 @@ def office(request):
 	data['doc_form']=doc_form
 	data['can_add_new_doc']=request.user.has_perm('docs.add_doc')
 	#=====================
-	dcs_tbl=doc.objects.filter(location=request.user.userprofile)
-	d={}
-	for i in dcs_tbl:
-		if i.pickup_date_time==None:
-			d[i.id]=i.student.name
-	data['docs_on_table']=json.dumps(d)
+	
+
+	data['docs_on_table']=doc.objects.filter(location=request.user.userprofile)
 	#=====================
 	return render(request,'docs/office.html',data)
 	
