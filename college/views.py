@@ -63,7 +63,9 @@ def home(request):
 
 	lists=college_models.custom_notice.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 	data['notifications']=lists
-
+	principal_list=college_models.principal_desk.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+	data['principal_desk']=principal_list
+	
 	return render(request,'college/home.html',data)
 
 def alumni(request):
@@ -148,8 +150,22 @@ def department(request,dept_name=None):
 			data.pop('dept_page')
 			data['department_list']=[{'name':i.name,'urlname':i.name.replace(' ','').lower()} for i in dept_list]
 			return render(request,'college/department_home.html',data)
-def principal(request):
+def principal(request,docid=None):
 	data={}
+	if docid!=None:
+		try:
+			obj=college_models.principal_desk.objects.get(id=int(docid))
+		except Exception as e:
+			print e
+			data['notice']={'title':'Not Available','description':'This document does not exist.','pub_date':None}	
+		else:
+			if obj.alive:
+				data['notice']=obj
+			else:
+				data['notice']={'title':'Not Available','description':'This document has been removed.','pub_date':None}	
+	else:
+		docs=college_models.principal_desk.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date','-id')
+		data['principal_desk_docs']=docs
 	return render(request,'college/principal_home.html',data)
 def contact_us(request):
 	data={}

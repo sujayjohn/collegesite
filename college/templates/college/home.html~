@@ -15,11 +15,11 @@
 	{%endfor%}
 </div>
 {%endif%}
-<br>
+<hr style='margin-bottom:3px;'>
 <div id='dock'>
 	<div class='homedock'>
 		
-		<div class='submenu'><hr>
+		<div class='submenu'>
 			<ul>
 				<a href='{%url 'docs_home'%}' ><li>Office</li></a>
 				<a href='{%url "attend_home"%}'><li>Attendence</li></a>
@@ -29,12 +29,12 @@
 				<a href=''><li>Forms</li></a>
 			</ul>
 		</div>
-		<a class='menu'>APPLICATIONS</a>
+		<a class='menu' href='#'>APPLICATIONS</a>
 		
 	</div>
 	<div class='homedock'>
-	<a class='menu'>NEWS FEED</a>
-		<div class='submenu'><hr>
+	<a class='menu' href='#'>NEWS FEED</a>
+		<div class='submenu'>
 		<ul>
 			{%for n in news%}
 			<a href='{%url "notice" n.id%}'><li>{{n.title|truncatewords:"5"}}</li></a>
@@ -51,7 +51,7 @@
 	</div>
 	
 	<div class='homedock'>
-		<div class='submenu'><hr>
+		<div class='submenu'>
 		<ul>
 			{%for i in notifications%}
 					<li>
@@ -67,7 +67,7 @@
 
 		</ul>
 		</div>
-		<a class='menu'>NOTIFICATIONS</a>
+		<a class='menu' href='#'>NOTIFICATIONS</a>
 		<div id='icons'>
 					<a href='{%url 'notification_rss'%}'>
 					<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
@@ -76,7 +76,7 @@
 		</div>
 	</div>
 	<div class='homedock'>
-		<div class='submenu'><hr>
+		<div class='submenu'>
 		<ul>
 			{%for i in events%}
 			<a><li></li></a>
@@ -85,15 +85,23 @@
 			<a href='{%url "events_home"%}'><li>more...</li></a>
 		</ul>
 		</div>
-		<a  class='menu'>EVENTS</a>
+		<a  class='menu' href='#'>EVENTS</a>
 	</div>
 	<div class='homedock'>
-		<div class='submenu'><hr>
+		<div class='submenu'>
 		<ul>
+			{%for i in principal_desk%}
+					<a href='{%url "principal_home" i.id%}'><li>					
+					{{i.title|truncatewords:"3"}}
+					{%if i.recent%}
+					<image width=25 async='' src='{%static "college/images/new2.gif"%}' alt='*'></img>
+					{%endif%}					
+					</li></a>
+				{%endfor%}
 			<a href='{%url "principal_home"%}'><li>more...</li></a>
 		</ul>
 		</div>
-		<a  class='menu'>Principal's Desk</a>
+		<a  class='menu' href='#'>Principal's Desk</a>
 	</div>
 </div>
 

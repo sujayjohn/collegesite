@@ -15,7 +15,7 @@
 	{%endfor%}
 </div>
 {%endif%}
-<br>
+<hr style='margin-bottom:3px;'>
 <div id='dock'>
 	<div class='homedock'>
 		
@@ -29,11 +29,11 @@
 				<a href=''><li>Forms</li></a>
 			</ul>
 		</div>
-		<a class='menu'>APPLICATIONS</a>
+		<a class='menu' href='#'>APPLICATIONS</a>
 		
 	</div>
 	<div class='homedock'>
-	<a class='menu'>NEWS FEED</a>
+	<a class='menu' href='#'>NEWS FEED</a>
 		<div class='submenu'>
 		<ul>
 			{%for n in news%}
@@ -67,7 +67,7 @@
 
 		</ul>
 		</div>
-		<a class='menu'>NOTIFICATIONS</a>
+		<a class='menu' href='#'>NOTIFICATIONS</a>
 		<div id='icons'>
 					<a href='{%url 'notification_rss'%}'>
 					<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
@@ -85,15 +85,25 @@
 			<a href='{%url "events_home"%}'><li>more...</li></a>
 		</ul>
 		</div>
-		<a  class='menu'>EVENTS</a>
+		<a  class='menu' href='#'>EVENTS</a>
 	</div>
 	<div class='homedock'>
 		<div class='submenu'>
 		<ul>
+			{%for i in principal_desk%}
+					<li>
+					<a href='{%url "principal_home" i.id%}'>
+					{{i.title|truncatewords:"3"}}
+					{%if i.recent%}
+					<image width=25 async='' src='{%static "college/images/new2.gif"%}' alt='*'></img>
+					{%endif%}
+					</a>
+					</li>
+				{%endfor%}
 			<a href='{%url "principal_home"%}'><li>more...</li></a>
 		</ul>
 		</div>
-		<a  class='menu'>Principal's Desk</a>
+		<a  class='menu' href='#'>Principal's Desk</a>
 	</div>
 </div>
 

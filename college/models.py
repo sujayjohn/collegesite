@@ -12,7 +12,15 @@ class document(models.Model):
 	associated_file=models.FileField(upload_to='files',blank=True,null=True,default=None)
 	alive=models.BooleanField(default=True)
 
-
+class principal_desk(document):
+	description=models.CharField(max_length=500)
+	pub_date=models.DateTimeField(default=timezone.now())
+	def recent(self):
+		now=timezone.now()
+		one_month_back=datetime.datetime(now.date().year,now.date().month-1,now.date().day,now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
+		if now>one_month_back:
+			return True
+		return False
 class custom_notice(document):
 	description=models.CharField(max_length=800)
 	pub_date=models.DateTimeField(default=timezone.now())

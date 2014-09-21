@@ -1,27 +1,27 @@
 {%extends 'college_template.html'%}
 
 {%block header%}
-
+	{%load static%}
+	<link type='text/css' rel='stylesheet' href='{%static "college/css/society_home.css"%}'></link> 
 {%endblock%}
 {%block body%}
 		<h5>{{soc_page}}</h5>
 	{%block dept_page%}
 	{%endblock%}
 	{% if not dept_page%}
-
+		<div class='message'>
 		<p>
 			The self-motivated and ceaseless activities of over two dozen clubs and societies constitute a very important part of College life and offer a large variety of avenues for self expression.
 			For each subject there is a Society that sponsors extra-curricular lectures and discussion and, in general, tries to stimulate interest in the subject.
 			There are many other academic and cultural society and clubs covering wide range of activities, such as debating, dramatics, mountaineering, film and music appreciation, social service, photography and electronics.
 		</p>
+		</div>
 		<hr>
 		{%if department_list%}
-			<div>
-			{%for soc in society_list%}
-				<a href='{%url "society_home" soc.urlname%}'>{{soc.name}}</a><br>
-			{%endfor%}
-			</div>
-		{%endif%}
+	{%for i in department_list%}
+	<a href='{%url 'department_home' i.urlname%}'>{{i.name}}</a><br>
+	{%endfor%}
+	{%endif%}
 {%endif%}
 {%endblock%}
 

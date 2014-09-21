@@ -56,6 +56,7 @@ print 'starting'
 	
 
 #make notifications
+print 'Notifications',
 for i in notifications:
 	a=college.models.custom_notice()
 	a.title=i
@@ -64,30 +65,42 @@ for i in notifications:
 	for i in xrange(int(random.random()*799)):
 		a.description+=random.choice(alphabet)
 	a.save()
-print 'Notifications added'
+print '......................................',
+print 'done'
+
 
 
 #make groups
+print 'Groups',
 for i in groupnames:
 	g1=Group()
 	g1.name=i
 	g1.save()
-print 'Groups Added'
+print '......................................',
+print 'done'
+
 
 #add course types
+print 'Course Type',
 for i in course_types:
 	a=college.models.course_type()
 	a.name=i
 	a.save()
-print 'Course Type Added'
+print '......................................',
+print 'done'
+
 #add courses
+print 'Courses',
 for i in courses:
 	a=college.models.course()
 	a.name=i['name']
 	a.type_of_course=college.models.course_type.objects.first()
 	a.save()
-print 'Courses added'
+print '......................................',
+print 'done'
+
 #add papers
+print 'Papers',
 for k,i in enumerate(papers):
 	a=college.models.paper()
 	a.code=i['code']
@@ -95,21 +108,29 @@ for k,i in enumerate(papers):
 	a.semester=1
 	a.course=college.models.course.objects.first()
 	a.save()
-print 'Papers Added'
+print '......................................',
+print 'done'
+
 
 #departments
+print 'Departments',
 for i in departments:
 	a=college.models.department()
 	a.name=i
 	a.save()
-print 'Departments Added'
+	
+
 #add societies
+print 'Societies',
 for i in societies:
 	a=college.models.society()
 	a.name=i
 	a.save()
-print 'Societies added'
+print '......................................',
+print 'done'
+
 #make users and userprofiles
+print 'Users',
 for i in users:
 	a=User()
 	a.username=i
@@ -121,10 +142,13 @@ for i in users:
 	if 'staff' in i:
 		b.staff_adv1=random.choice(college.models.society.objects.all())
 	b.save()
-print 'Users added'
+print '......................................',
+print 'done'
+
 
 
 #make notices
+print 'News',
 for i in news:
 	a=rss.models.notice()
 	a.title=i
@@ -136,20 +160,26 @@ for i in news:
 	a.author=random.choice(x)
 	a.approved=True
 	a.save()
-print 'News added'
+print '......................................',
+print 'done'
+
 
 
 
 #make students
+print 'Students',
 for i in students:
 	a=college.models.student()
 	a.name=i
 	a.course=college.models.course.objects.first()
 	a.save()
-print 'Students added'
+print '......................................',
+print 'done'
+
 
 
 #add a contact
+print 'Contacts',
 a=college.models.contact()
 a.name='Phone'
 a.value='+91-11-2766 7271 '
@@ -158,14 +188,20 @@ a=college.models.contact()
 a.name='Admission Help Line'
 a.value='011-27662168'
 a.save()
-print 'Contacts added'
+print '......................................',
+print 'done'
+
 #add quotes
+print 'Quotes',
 for i in quotes:
 	a=college.models.quote()
 	a.value=i
 	a.save()
-print 'Quotes added'
+print '......................................',
+print 'done'
+
 #make doctypes
+print 'Document types',
 for i in doctypes:
 	a=docs.models.doc_type()
 	a.name=i
@@ -174,9 +210,12 @@ for i in doctypes:
 	a.stage3=random.choice(college.models.userprofile.objects.all())
 	a.stage4=random.choice(college.models.userprofile.objects.all())
 	a.save()
-print 'Doc types Added'
+print '......................................',
+print 'done'
+
 
 #add dummy docs
+print 'Docs',
 for i in range(10):
 	a=docs.models.doc()
 	a.student=random.choice(college.models.student.objects.all())
@@ -185,18 +224,23 @@ for i in range(10):
 	a.stage_count=x.index(random.choice(x))
 	a.location=x[a.stage_count]
 	a.save()
-print 'Docs added'
+print '......................................',
+print 'done'
 
 
+print 'Rooms',
 for i in rooms:
 	a=roombook.models.room()
 	a.name=i
 	a.ac_available=random.choice([True,False])
 	a.projector_available=random.choice([True,False])
 	a.save()
-print 'rooms added'
+print '......................................',
+print 'done'
+
 
 #add a few reservations
+print 'Reservations',
 for i in range(20):
 	a=roombook.models.reservation()
 	a.booked_by=random.choice(college.models.userprofile.objects.all())
@@ -207,10 +251,13 @@ for i in range(20):
 	a.time_to=datetime.datetime(now.date().year,now.date().month,random.choice(range(now.date().day,22)),now.time().hour,now.time().minute,now.time().second,now.time().microsecond,now.tzinfo)
 	a.approved=True;
 	a.save()
-print 'reservations added'
+print '......................................',
+print 'done'
+
 
 
 #add dummy attendence for students
+print 'Attendence',
 s=college.models.student.objects.first()
 for paper in college.models.paper.objects.filter(course=s.course).filter(semester=1).order_by('id'):
 	mth_t1=attendence.models.month_total()
@@ -234,12 +281,10 @@ for paper in college.models.paper.objects.filter(course=s.course).filter(semeste
 		st_at.paper_attend=paper_att
 		st_at.month1=mth_r1
 		st_at.save()
+print '......................................',
+print 'done'
 
 
-
-
-
-print 'Attendence added'
 
 
 print '===================================================='
