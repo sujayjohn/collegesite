@@ -14,5 +14,5 @@ urlpatterns = patterns('',
     url(r'^roombook/',include('roombook.urls')),
     url(r'^attendence/',include('attendence.urls')),
     
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^webmaster/', include(admin.site.urls)),
 )

@@ -53,3 +53,7 @@ height:80%;
 overflow:auto;
 position:relative;
 }
+.submenu
+{
+display:none;
+}

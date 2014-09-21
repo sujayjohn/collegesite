@@ -19,3 +19,28 @@ $(function() {
     setInterval( "slideSwitch()", 5000 );
 });
 
+//..............................
+$(document).ready(function()
+{
+
+	$(".menu").click(function()
+	{
+		var X=$(this).attr('id');
+		
+		if(X==1)
+		{
+
+		$(".submenu").hide();
+		$(this).attr('id', '0');
+		}
+		else
+		{
+
+		$(".submenu").show();
+		$(this).attr('id', '1');
+		}
+		
+		});
+
+	
+});

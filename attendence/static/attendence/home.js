@@ -1,8 +1,8 @@
 Chart.defaults.global.animateScale=false;
 function attended(value){
 		this.value= value;
-		this.color= "green";
-		this.highlight= "#8ae234";
+		this.color= "#6fb22f";
+		this.highlight= "green";
 		this.label= "Present";
 	};
 function missed(value){

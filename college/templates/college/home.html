@@ -3,7 +3,7 @@
 {%block header%}
 {% load staticfiles%}
 <link rel="stylesheet" type="text/css" href='{% static "/static/college/css/home.css"%}'>
-
+<script type="text/javascript" src="{%static 'college/home.js'%}"></script>
 
 {%endblock%}
 
@@ -17,8 +17,8 @@
 {%endif%}
 <hr>
 	<div class='homedock'>
-	APPLICATIONS<hr>
-		<ul>
+	<a class='menu'>APPLICATIONS</a><hr>
+		<ul class='submenu'>
 			<a href='{%url 'docs_home'%}' ><li>Office</li></a>
 			<a href='{%url "attend_home"%}'><li>Attendence</li></a>
 			<a href='{%url 'roombook_home'%}'><li>Room Booking</li></a>
