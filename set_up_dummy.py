@@ -287,15 +287,20 @@ print 'done'
 
 print 'uploading files'
 filepath='/home/ghost/Desktop/design4/dummy_files'
-path=os.path.join(filepath,'dummy_files.pdf')
-print path
-f=file(path)
-myFile=File(f)
-a=college.models.principal_desk()
-a.title='Why the IMBH course?'
-a.associated_file=myFile
-a.description='''A description of the IMBH course and why it was introduced.'''
-a.save()
+path=['imbh.pdf','dismissal2013.pdf','kalyansundaram.pdf','armstrong.pdf']
+
+for i in path:
+	p=os.path.join(filepath,i)
+	f=file(p)
+	myFile=File(f)
+	a=college.models.principal_desk()
+	a.title=path[:-4]
+	a.associated_file=myFile
+	a.description=''
+	alphabet='qwertyui  opasdfg   hjklzxcvbnm      '
+	for i in xrange(int(random.random()*499)):
+		a.description+=random.choice(alphabet)
+	a.save()
 print '......................................done'
 
 
