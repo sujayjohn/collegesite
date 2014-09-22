@@ -28,7 +28,7 @@
 </div>
 {%elif principal_desk_docs%}
 	{%for val in principal_desk_docs%}
-	<a href='{%url "notice" val.id%}'>
+	<a href='{%url "principal_home" val.id%}'>
 	<div class='notice'>
 	<h3>{{val.title}}<p class='subtext'>
 	<i>{{val.pub_date|date:'d F Y'}}</i></p><hr></h3>
