@@ -64,7 +64,10 @@ class doc(models.Model):
 	notes=models.CharField(max_length=200,blank=True)
 	
 	
-	
+	def picked(self):
+		if self.pickup_date_time!=None:
+			return True
+		return False
 	def addnote(self,new_note):
 		self.notes+=' | '+new_note
 		self.save()

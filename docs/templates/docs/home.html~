@@ -26,15 +26,46 @@
 			<tr><td>Last accessed</td><td>{{result.last_accessed}}</td></tr>
 			<tr><td>Notes</td><td>{{result.notes}}</td></tr>
 			</table>
-			{%if result.ready%}Document is ready for pickup{%endif%}
+			{%if result.ready and not error%}Document is ready for pickup{%endif%}
 		{%endif%}
 		{%if error%}
 			{{error}}
 		{%endif%}
 		
 	</div>
-<hr>
-{%block content%}
-{%endblock%}
+	{%if docs_on_table%}
+	<div id='table'>
+		<div id='inbox' class='tray'>
+		INBOX
+			{%for doc in docs_on_table%}
+				<button id={{doc.id}}>{{doc.id}}-{{doc.doctype}}</button>
+			{%endfor%}
+		</div>
+		<div id='controls' class='tray'>
+		CONTROLS
+			<input class='control_items' type='text' id='table_search_box' onkeyup='table_search(event);'></input>
+			<button class='control_items' id='table_move_button' onclick='move();'>Move</button>
+			<button class='control_items' id='table_note_button' onclick='add_note();'>Make Note</button>	
+			<textarea class='control_items' id='note_text'  cols="20">Notes</textarea>
+			<button class='control_items' id='clear_outbox_button' onclick='clear_outbox();'>Clear Outbox</button>
+		</div>
+		<div id='outbox' class='tray'>
+		OUTBOX
+		</div>
+	
+		
+		{%if doc_form%}
+		<hr>
+		<div id='new_document'>
+				<form method='post' action='{%url "docs_add"%}'>
+			
+				{%csrf_token%}
+				{{doc_form}}
+					<input type='submit' value='Add document'></input>
+				</form>
+		</div>
+		{%endif%}
+	</div>
+	{%endif%}
 
 {%endblock%}

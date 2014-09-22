@@ -25,11 +25,27 @@ float:left;
 height:100px;
 overflow:auto;
 margin-left:10px;
-margin-right:10[x;
+margin-right:10px;
 }
 .ready
 {background:lightgreen;}
-
+.tray
+{float:left;}
+.tray button
+{margin:5px;height:50px;}
+#inbox,#outbox
+{
+width:39%;
+border:1px solid white;
+height:400px;
+overflow:auto;
+}
+#controls
+{
+width:19%;
+border:1px solid white;
+height:400px;
+}
 
 
 

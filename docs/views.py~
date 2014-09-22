@@ -10,15 +10,12 @@ import json
 
 def home(request,docid=None):
 	data={}
-	
-	print '=====================',docid,type(docid)
 	if docid!=None:
 		docid=int(docid)
 		try:
 			obj=doc.objects.get(id=docid)
 			
 		except Exception as e:
-			print e
 			data['error']='The document does not exist.'
 		else:
 			if obj.pickup_date_time!=None:
@@ -26,7 +23,11 @@ def home(request,docid=None):
 			data['result']=obj
 				
 	#office users go to office
-	if request.user.is_authenticated() and request.user.is_active and request.user.has_perm('docs.change_doc'):
+	if request.user.is_authenticated() and request.user.is_active:
+		if request.user.has_perm('docs.add_doc'):
+			data['doc_add']=doc_form
+		if request.user.has_perm('docs.change_doc'):
+			data['docs_on_table']=doc.objects.filter(location=request.user.userprofile).filter(pickup_date_time!=None)
 		
 	return render(request,'docs/home.html',data)
 

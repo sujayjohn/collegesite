@@ -61,10 +61,11 @@ class doc(models.Model):
 	last_accessed=models.DateTimeField(auto_now=True)
 	pickup_date_time=models.DateTimeField(blank=True,null=True)
 
-	notes=models.CharField(max_length=150,blank=True)
+	notes=models.CharField(max_length=200,blank=True)
 	
 	
-	
+	def picked(self):
+		
 	def addnote(self,new_note):
 		self.notes+=' | '+new_note
 		self.save()

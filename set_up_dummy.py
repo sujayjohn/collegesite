@@ -294,7 +294,7 @@ for i in path:
 	f=file(p)
 	myFile=File(f)
 	a=college.models.principal_desk()
-	a.title=path[:-4]
+	a.title=i[:-4]
 	a.associated_file=myFile
 	a.description=''
 	alphabet='qwertyui  opasdfg   hjklzxcvbnm      '
