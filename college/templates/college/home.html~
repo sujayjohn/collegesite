@@ -91,17 +91,25 @@
 		<div class='submenu'>
 		<ul>
 			{%for i in principal_desk%}
-					<a href='{%url "principal_home" i.id%}'><li>					
+					<li>
+					<a href='{%url "principal_home" i.id%}'>
 					{{i.title|truncatewords:"3"}}
 					{%if i.recent%}
 					<image width=25 async='' src='{%static "college/images/new2.gif"%}' alt='*'></img>
-					{%endif%}					
-					</li></a>
+					{%endif%}
+					</a>
+					</li>
 				{%endfor%}
 			<a href='{%url "principal_home"%}'><li>more...</li></a>
 		</ul>
 		</div>
 		<a  class='menu' href='#'>Principal's Desk</a>
+		<div id='icons'>
+					<a href='{%url 'notification_rss'%}'>
+					<img async='' src='{%static 'college/images/rss.jpg'%}' alt='RSS' height=15px width=15px></img>
+					</a>
+				
+		</div>
 	</div>
 </div>
 

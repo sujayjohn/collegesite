@@ -33,19 +33,7 @@ def home(request,docid=None):
 
 
 
-def office(request):
-	#only office users should be able to use
-	if (not request.user.has_perm('docs.change_doc')) or (not request.user.is_active):
-		return redirect(home)
-	data={} 
-	#=====================
-	data['doc_form']=doc_form
-	data['can_add_new_doc']=request.user.has_perm('docs.add_doc')
-	#=====================
-	data['docs_on_table']=doc.objects.filter(location=request.user.userprofile)
-	#=====================
-	return render(request,'docs/office.html',data)
-	
+
 @login_required
 @require_http_methods(['POST'])
 def add(request):

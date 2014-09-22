@@ -27,7 +27,7 @@ def home(request,docid=None):
 		if request.user.has_perm('docs.add_doc'):
 			data['doc_add']=doc_form
 		if request.user.has_perm('docs.change_doc'):
-			data['docs_on_table']=doc.objects.filter(location=request.user.userprofile).filter(pickup_date_time!=None)
+			data['docs_on_table']=doc.objects.filter(location=request.user.userprofile)
 		
 	return render(request,'docs/home.html',data)
 

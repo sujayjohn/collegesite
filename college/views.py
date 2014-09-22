@@ -63,7 +63,7 @@ def home(request):
 
 	lists=college_models.custom_notice.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 	data['notifications']=lists
-	principal_list=college_models.principal_desk.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+	principal_list=college_models.principal_desk.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date','-id')[:5]
 	data['principal_desk']=principal_list
 	
 	return render(request,'college/home.html',data)

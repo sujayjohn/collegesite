@@ -4,7 +4,7 @@
 {% load staticfiles%}
 	{%if notice%}
 		<link rel="stylesheet" type="text/css" href='{% static "rss/notice.css"%}'>
-	{%elif notifications%}
+	{%elif principal_desk_docs%}
 		<link rel="stylesheet" type="text/css" href='{% static "rss/notice_board.css"%}'>
 	{%endif%}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
@@ -26,23 +26,17 @@
 			<a href='/{{notice.associated_file.url}}' target='_blank'>Document Link</a>
 		{%endif%}
 </div>
-{%endif%}
-{%if notifications%}
-
-	{%for notice in notifications%}
-	<a href='{%url "notification_view" notice.id%}'>
-		<div class='notice'>
-			<h3>{{notice.title}}<p class='subtext'>
-			<i>{{notice.pub_date|date:'d F Y'}}</i></p><hr></h3>
-
-			{{notice.description|truncatewords:'10'}}
-		
-			{%if notice.associated_file%}
-				<hr>
-				<a href='/{{notice.associated_file.url}}' target='_blank'>Document Link</a>
-			{%endif%}
-		</div>
+{%elif principal_desk_docs%}
+	{%for val in principal_desk_docs%}
+	<a href='{%url "notice" val.id%}'>
+	<div class='notice'>
+	<h3>{{val.title}}<p class='subtext'>
+	<i>{{val.pub_date|date:'d F Y'}}</i></p><hr></h3>
+	{{val.description|truncatewords:"10"}}
+	</div>
 	</a>
 	{%endfor%}
+
 {%endif%}
+
 {%endblock%}

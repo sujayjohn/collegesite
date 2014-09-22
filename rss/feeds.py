@@ -2,7 +2,7 @@ from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from rss import models
 from django.utils import timezone
-from college.models import custom_notice
+from college.models import custom_notice,principal_desk
 
 class notice_feed(Feed):
 	title="Notices for college"
@@ -14,7 +14,7 @@ class notice_feed(Feed):
 	def item_title(self,item):
 		return item.title
 	def item_description(self,item):
-		return item.description[:30]+' ...'
+		return item.description[:50]+' ...'
 	def item_link(self,item):
 		return reverse('notice',args=[item.id])
 		
@@ -28,6 +28,19 @@ class notification_feed(Feed):
 	def item_title(self,item):
 		return item.title
 	def item_description(self,item):
-		return item.description[:30]+' ...'
+		return item.description[:50]+' ...'
 	def item_link(self,item):
 		return reverse('notification_view',args=[item.id])
+
+class principal_feed(Feed):
+	title="Updates from the Principal's Desk"
+	link='/principal/'
+	description="Updates from the Principal's desk section fo the website"
+	def items(self):
+		return principal_desk.objects.filter(alive=True).filter(pub_date__lte=timezone.now()).order_by('-pub_date','-id')[:5]
+	def item_title(self,item):
+		return item.title
+	def item_description(self,item):
+		return item.description[:50]+'...'
+	def item_link(self,item):
+		return reverse('principal_home',args=[item.id])
