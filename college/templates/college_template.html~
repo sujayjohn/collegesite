@@ -42,6 +42,7 @@
 					<a href='{%url "admissions_home"%}'><li>Admissions</li></a>					
 					<a href='{%url 'society_home'%}'><li>Societies</li></a>
 					<a href='{%url 'department_home'%}'><li>Departments</li></a>
+					<a href='{}'><li>Events</li></a>
 					<a href='{%url 'archive_home'%}'><li>Archives</li></a>
 					<a href='{%url 'alumni_home'%}'><li>Alumni</li></a>
 					<a href='{%url 'contact_us'%}'><li>Contact</li></a>

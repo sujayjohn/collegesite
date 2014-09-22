@@ -3,10 +3,6 @@
 height:auto;
 text-align:left;
 }
-#admission_info div
-{
-background-color:#D1DBBD;
-}
 #admission_info li,.admission_info a
 {
 color:black;
@@ -19,8 +15,13 @@ color:black;
 margin:0;
 list-style:inherit;
 }
-h4
+.message *
 {
-color:#E36C0A;
+width:90%;
+margin-left:auto;
+margin-right:auto;
 }
+.message table
+{width:auto;}
+.message hr{width:80%;}
 
