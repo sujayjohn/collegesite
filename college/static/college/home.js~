@@ -29,7 +29,7 @@ $(document).ready(function()
 		
 		if(X==1)
 		{
-		$(".submenu").slideUp(1);
+		$(".submenu").slideUp();
 		$(this).attr('id', '0');
 		}
 		else

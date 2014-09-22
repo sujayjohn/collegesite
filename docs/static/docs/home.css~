@@ -41,7 +41,7 @@ height:400px;
 overflow:auto;
 }
 #controls
-{
+{float:left;
 width:19%;
 border:1px solid white;
 height:400px;

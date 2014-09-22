@@ -36,13 +36,40 @@ window.location.href=url;
 console.log('search called');
 });
 //------------------------------------------------------------------------------------------------------------------------------------------
-$('.tray button').click(function move(){
-	var parent=this.parentElement.id;
-	var button=$('#'+this.id);
-	if(parent=='inbox')
+$('.tray button').click(
+function move()
+	{
+	var id=this.id;
+	console.log(id);
+	var inbox=$('#inbox')[0];
+	var outbox=$('#outbox')[0];
+	
+	var parent=this.parentElement;
+	
+	if (parent==inbox)
+	{inbox.removeChild(this);
+	outbox.appendChild(this);
+	}
+	if (parent==outbox)
+	{outbox.removeChild(this);
+	inbox.appendChild(this);}
+	}
+);
+//------------------------------------------------------------------------------------------------------------------------------------------
+$('#table_search_box').keyup(
+function search_table()
+	{
+	var id=this.value;
+	var buttons=$('.tray button');
+	for(var i=0;i<buttons.length;i++)
 		{
-		$('#inbox')[0].removeChild(this);
-		$('#outbox').appendChild(this);
+		if((buttons[i].id+'')==id)
+			{
+			var parent=buttons[i].parentElement;
+			//do domethig to the 
+			}
 		}
-});
+	
+	}
+);
 
